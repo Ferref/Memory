@@ -1,18 +1,26 @@
 class Jatek {
-  constructor(jatekMod, jatekosNev1 = "Jatekos1", jatekosNev2 = "Jatekos2", tablaMeret = 4) {
-    this.jatekMod = jatekMod;
-    this.jatekosNev2 = (jatekmod === "gepEllen") ? jatekosNevGeneral : jatekosNev2;
+  constructor(ellenfel, tablaMeret = 4, idokorlatInSec = null, jatekosNev1 = "Jatekos1", jatekosNev2 = "Jatekos2") {
     this.nehezsegiSzint = nehezsegiSzint;
-    this.tabla = this.tablaGeneral(tablaMeret);
-  }
+    this.tabla = tablaGeneral(tablaMeret);
+    this.idokorlatInSec = idokorlatInSec;
 
-  jatekosNevGeneral() {
-    lehetsegesJatekosNevek = ["Béla", "Tibi", "Ottó", "Anna", "Niki", "Zsolti", "Alfréd"];
-    lehetsegesJatekosNev = lehetsegesJatekosNevek[Math.floor(Math.random() * lehetsegesJatekosNevek + 1)];
-    return lehetsegesJatekosNev;
+    switch (ellenfel) {
+      case "ember":
+        this.jatekos1 = new Jatekos("ember", jatekosNev1);
+        this.jatekos2 = new Jatekos("ember", jatekosNev2);
+        break;
+      case "szolo":
+        this.jatekos1 = new Jatekos("ember", jatekosNev1);
+        this.idokorlatInSec = idokorlatInSec;
+        break;
+      default:
+        // case "szamitogep"
+        this.jatekos1 = new Jatekos("ember", jatekosNev1);
+        this.jatekos2 = new Jatekos("szamitogep");
+        break;
+    }
   }
-
-  tablaGeneral(tablaMeret = 4) {
+  static tablaGeneral(tablaMeret = 4) {
     const kepekUtvonal = './kepek/';
     const tabla = [];
     const fs = require('fs');
@@ -39,5 +47,28 @@ class Jatek {
     return tabla;
   }
 
+  jatekIndit() {
+
+  }
 
 }
+
+class Jatekos {
+  constructor(jatekosMod, jatekosNev = "Jatekos") {
+    this.pontok = pontok;
+
+    if (jatekosMod = "ember") {
+      this.jatekosNev = jatekosNev;
+    }
+    else {
+      this.jatekosNev = jatekosNevGeneral();
+    }
+  }
+
+  static jatekosNevGeneral() {
+    lehetsegesJatekosNevek = ["Béla", "Tibi", "Ottó", "Anna", "Niki", "Zsolti", "Alfréd"];
+    lehetsegesJatekosNev = lehetsegesJatekosNevek[Math.floor(Math.random() * lehetsegesJatekosNevek + 1)];
+    return lehetsegesJatekosNev;
+  }
+}
+
