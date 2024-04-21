@@ -93,38 +93,23 @@ body {
   }
 }
 
-/* Niki kódja */
-
-
-/*
-.jatekmod{
+.jatekmod {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0; 
-}
-*/
-
-/* nincsenek pont középen, a képek egyre kisebbek
-   display flex miatt van valszeg de nem tudom megoldani
-*/
-.jatekmod{
-  display: flex;
-  margin-left: 200px;
-  margin-right: 200px;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  position: relative;
+  margin-left: 200px;
+  margin-right: 200px;
   margin-bottom: 50px;
   padding: auto;
 }
 
 
-.kepek{
+.kepek {
   border: 10px solid black;
-  width: 50%;
-  margin-bottom: 20px;
+  width: 300px;
+  height: 300px;
+  margin-bottom: 25px;
 }
 
 /* jatekosellen oldal*/
