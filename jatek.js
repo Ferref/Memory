@@ -5,11 +5,11 @@ class Jatek {
     tablaMeret = 4,
     jatekosNev1 = "Jatekos1",
     jatekosNev2 = "Jatekos2",
-    idokorlatInSec = "Nincs"
+    idokorlatInMillisec = "Nincs"
   ) {
     this.tablaMeret = Math.abs(tablaMeret);
     this.tablaMeret = this.tablaMeret % 2 === 0 ? this.tablaMeret : this.tablaMeret - 1;
-    this.idokorlatInSec = idokorlatInSec;
+    this.idokorlatInPerc = Math.abs(idokorlatInMillisec) * 60000;
 
     // Játékmód kiválasztása
     switch (jatekMod) {
