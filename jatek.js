@@ -5,7 +5,8 @@ class Jatek {
     tablaMeret,
     jatekosNev1,
     jatekosNev2,
-    idokorlat
+    idokorlat,
+    nehezseg
   ) {
     this.tablaMeret = Math.abs(Number(tablaMeret.split(" ")[0]));
     this.tablaMeret = this.tablaMeret % 2 === 0 ? this.tablaMeret : this.tablaMeret - 1;
@@ -33,6 +34,7 @@ class Jatek {
     this.aktivLapok = [];
     this.kieertekelesTortenik = false;
     this.aktivJatekos = null;
+    this.nehezseg = nehezseg;
 
     this.jatekForrasok = {
       kartyaKepek: 'kepek/kartyak/',
