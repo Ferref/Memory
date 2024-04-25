@@ -1,15 +1,15 @@
 class Jatek {
   // Játékos létrehozása
   constructor(
-    jatekMod = "szamitogep",
-    tablaMeret = 4,
-    jatekosNev1 = "Jatekos1",
-    jatekosNev2 = "Jatekos2",
-    idokorlatInMillisec = "Nincs"
+    jatekMod,
+    tablaMeret,
+    jatekosNev1,
+    jatekosNev2,
+    idokorlat
   ) {
-    this.tablaMeret = Math.abs(tablaMeret);
+    this.tablaMeret = Math.abs(Number(tablaMeret.split(" ")[0]));
     this.tablaMeret = this.tablaMeret % 2 === 0 ? this.tablaMeret : this.tablaMeret - 1;
-    this.idokorlatInPerc = Math.abs(idokorlatInMillisec) * 60000;
+    this.idokorlatInMillisec = Math.abs(Number(idokorlat.split(" ")[0])) * 60000;
 
     // Játékmód kiválasztása
     switch (jatekMod) {
@@ -275,6 +275,6 @@ class Tabla {
   }
 }
 
-const ujJatek = new Jatek();
+const ujJatek = new Jatek("szamitogep", "4 x 4", "JatekosNev1", "JatekosNev2", "10 perc");
 ujJatek.jatekIndit();
 
