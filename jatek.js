@@ -308,3 +308,4 @@ const ujJatek = new Jatek(
 );
 
 ujJatek.jatekIndit();
+//
