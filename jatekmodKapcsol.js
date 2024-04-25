@@ -33,19 +33,25 @@ function kivalasztottEllenorzes() {
   let kivalasztottIdozito = document.querySelector('#idozito button.kivalasztott');
   let kivalasztottNehezseg = document.querySelector('#nehezseg button.kivalasztott');
 
-  // Ellenőrizzük, hogy van-e #nehezseg elemünk az oldalon
+  // Ellenőrizzük, hogy az adott elemek léteznek-e az oldalon, és csak ha léteznek, kérdezzük le a textContent-et
+  tablameret = kivalasztottTablameret ? kivalasztottTablameret.textContent : "Nincs";
+  idozito = kivalasztottIdozito ? kivalasztottIdozito.textContent : "Nincs";
+  nehezseg = kivalasztottNehezseg ? kivalasztottNehezseg.textContent : "Nincs";
+
+  // Ha van #nehezseg elemünk az oldalon, ellenőrizzük a többi kiválasztott gombot
   if (document.querySelector('#nehezseg')) {
-    // Ha van, akkor ellenőrizzük a kiválasztott gombokat
     if (!kivalasztottTablameret || !kivalasztottIdozito || !kivalasztottNehezseg) {
       alert("Hiányos adatok! Kérjük válasszon ki egy elemet minden kategóriából.");
       return false;
     }
   } else {
-    // Ha nincs #nehezseg elemünk az oldalon, akkor csak a többi kategória ellenörzése kell nekünk
+    // Ha nincs #nehezseg elemünk az oldalon, csak a többi kategória ellenőrzése szükséges
     if (!kivalasztottTablameret || !kivalasztottIdozito) {
       alert("Hiányos adatok! Kérjük válasszon ki egy elemet minden kategóriából.");
       return false;
     }
+    // Ha nincs #nehezseg elemünk az oldalon, akkor azonnal állítsuk "Nincs"-re
+    nehezseg = "Nincs";
   }
   return true;
 }
@@ -60,9 +66,6 @@ jatekInditasGombok.forEach(gomb => {
       nev1Input = document.getElementById("nev1Input").value;
       nev2Input = document.getElementById("nev2Input").value;
       jatekmod = window.location.pathname.split("/").pop().split(".")[0];
-      tablameret = document.querySelector('#tablameret button.kivalasztott').textContent;
-      idozito = document.querySelector('#idozito button.kivalasztott').textContent;
-      nehezseg = document.querySelector('#nehezseg button.kivalasztott').textContent;
 
       // jatekAdatok létrehozása és exportálása
       const jatekAdatok = { nev1Input, nev2Input, jatekmod, tablameret, idozito, nehezseg };
