@@ -66,7 +66,12 @@ jatekInditasGombok.forEach(gomb => {
     if (kivalasztottEllenorzes()) {
       // Konstansok létrehozása
       nev1Input = document.getElementById("nev1Input").value;
-      nev2Input = document.getElementById("nev2Input").value;
+      nev2Input = document.getElementById("nev2Input");
+      if (nev2Input) {
+        nev2Input = nev2Input.value;
+      } else {
+        nev2Input = "Nincs";
+      }
       jatekmod = window.location.pathname.split("/").pop().split(".")[0];
 
       // jatekAdatok létrehozása és exportálása
