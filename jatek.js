@@ -16,7 +16,7 @@ class Jatek {
 
     // Játékmód kiválasztása
     switch (jatekMod) {
-      case "ember":
+      case "jatekosellen":
         this.jatekos1 = new Jatekos(jatekosNev1);
         this.jatekos2 = new Jatekos(jatekosNev2);
         break;

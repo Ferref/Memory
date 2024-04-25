@@ -64,7 +64,7 @@ jatekInditasGombok.forEach(gomb => {
       idozito = document.querySelector('#idozito button.kivalasztott').textContent;
       nehezseg = document.querySelector('#nehezseg button.kivalasztott').textContent;
 
-      // Objektum létrehozása és exportálása
+      // jatekAdatok létrehozása és exportálása
       const jatekAdatok = { nev1Input, nev2Input, jatekmod, tablameret, idozito, nehezseg };
       window.localStorage.setItem('jatekAdatok', JSON.stringify(jatekAdatok));
 
