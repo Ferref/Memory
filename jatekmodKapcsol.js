@@ -1,3 +1,10 @@
+let nev1Input;
+let nev2Input;
+let jatekmod;
+let tablameret;
+let idozito;
+let nehezseg;
+
 function gombokSotitese(gombok) {
   gombok.forEach(gomb => {
     gomb.addEventListener('click', function () {
@@ -49,6 +56,18 @@ jatekInditasGombok.forEach(gomb => {
   gomb.addEventListener('click', function (event) {
     event.preventDefault();
     if (kivalasztottEllenorzes()) {
+      // Konstansok létrehozása
+      nev1Input = document.getElementById("nev1Input").value;
+      nev2Input = document.getElementById("nev2Input").value;
+      jatekmod = window.location.pathname.split("/").pop().split(".")[0];
+      tablameret = document.querySelector('#tablameret button.kivalasztott').textContent;
+      idozito = document.querySelector('#idozito button.kivalasztott').textContent;
+      nehezseg = document.querySelector('#nehezseg button.kivalasztott').textContent;
+
+      // Objektum létrehozása és exportálása
+      const jatekAdatok = { nev1Input, nev2Input, jatekmod, tablameret, idozito, nehezseg };
+      window.localStorage.setItem('jatekAdatok', JSON.stringify(jatekAdatok));
+
       window.location.href = this.getAttribute('href');
     }
   });
