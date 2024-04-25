@@ -87,6 +87,11 @@ body {
   outline: 0;
 }
 
+.kivalasztott {
+    background-color: #333;
+    color: #fff;
+}
+
 @media (min-width: 768px) {
   .navGomb {
     padding: 0 40px;
