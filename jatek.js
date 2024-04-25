@@ -10,7 +10,7 @@ class Jatek {
   ) {
     this.tablaMeret = Math.abs(Number(tablaMeret.split(" ")[0]));
     this.tablaMeret = this.tablaMeret % 2 === 0 ? this.tablaMeret : this.tablaMeret - 1;
-    this.idokorlatInSeconds = Math.abs(Number(idokorlat.split(" ")[0])) * 60; // Időt másodpercekben tároljuk
+    this.idokorlatInSeconds = Math.abs(Number(idokorlat.split(" ")[0])) * 60;
 
     // Játékmód kiválasztása
     switch (jatekMod) {
@@ -70,6 +70,37 @@ class Jatek {
     }
   }
 
+  // Elinditja a jatekot
+  jatekIndit() {
+    console.log("Start...");
+    this.kartyakGeneral();
+    this.aktivJatekos = this.jatekos1;
+
+    this.kovetkezoKor();
+    this.kartyakMegjelenitese();
+
+    // Időzítő kezelése
+    const idozitoElem = document.getElementById('idozito');
+
+    if (this.idokorlatInSeconds) {
+      // Van időkorlát, jelenítsük meg az időt
+      const idozitoId = setInterval(() => {
+        const minutes = Math.floor(this.idokorlatInSeconds / 60);
+        const seconds = this.idokorlatInSeconds % 60;
+        idozitoElem.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+        this.idokorlatInSeconds--; // Csökkentjük az időt minden másodpercben
+
+        if (this.idokorlatInSeconds < 0) {
+          clearInterval(idozitoId); // Időzítő leállítása, ha az idő lejárt
+          idozitoElem.textContent = "Vége"; // Jelzés, hogy vége az időnek
+          this.jatekVege(); // Hívjuk meg a játék vége metódust
+        }
+      }, 1000);
+    } else {
+      // Nincs időkorlát, csak jelenítsük meg a "Nincs" szöveget
+      idozitoElem.textContent = "Nincs";
+    }
+  }
 
   // Megjeleníti a táblán a kárytákat
   kartyakMegjelenitese() {
@@ -143,27 +174,6 @@ class Jatek {
     }
 
     this.kieertekelesTortenik = false;
-  }
-
-  // Elinditja a jatekot
-  jatekIndit() {
-    console.log("Start...");
-    this.kartyakGeneral();
-    this.aktivJatekos = this.jatekos1;
-
-    // Időzítő indítása
-    this.idozitoId = setInterval(() => {
-      if (this.idokorlatInSeconds > 0) {
-        this.idokorlatInSeconds--; // Minden másodpercben csökkentjük 1-gyel
-        if (this.idokorlatInSeconds <= 0) {
-          clearInterval(this.idozitoId); // Időzítő leállítása
-          this.jatekVege(); // Játék vége metódus meghívása
-        }
-      }
-    }, 1000);
-
-    this.kovetkezoKor();
-    this.kartyakMegjelenitese();
   }
 
   // Befejezi a játékot
@@ -277,7 +287,6 @@ class Kartya {
     this.kartyaStatus = "kiment";
   }
 }
-
 
 class Tabla {
   constructor(tablaMeret) {
