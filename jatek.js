@@ -275,6 +275,8 @@ class Tabla {
   }
 }
 
+// jatekmodKapcsol.js-ből kapjuk meg
+const jatekMod = "";
 const ujJatek = new Jatek("szamitogep", "4 x 4", "JatekosNev1", "JatekosNev2", "10 perc");
 ujJatek.jatekIndit();
 
