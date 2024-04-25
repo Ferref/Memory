@@ -10,7 +10,7 @@ class Jatek {
   ) {
     this.tablaMeret = Math.abs(Number(tablaMeret.split(" ")[0]));
     this.tablaMeret = this.tablaMeret % 2 === 0 ? this.tablaMeret : this.tablaMeret - 1;
-    this.idokorlatInMillisec = Math.abs(Number(idokorlat.split(" ")[0])) * 60000;
+    this.idokorlatInSeconds = Math.abs(Number(idokorlat.split(" ")[0])) * 60; // Időt másodpercekben tároljuk
 
     // Játékmód kiválasztása
     switch (jatekMod) {
@@ -145,18 +145,27 @@ class Jatek {
     this.kieertekelesTortenik = false;
   }
 
-
-
-
   // Elinditja a jatekot
   jatekIndit() {
     console.log("Start...");
     this.kartyakGeneral();
     this.aktivJatekos = this.jatekos1;
 
+    // Időzítő indítása
+    this.idozitoId = setInterval(() => {
+      if (this.idokorlatInSeconds > 0) {
+        this.idokorlatInSeconds--; // Minden másodpercben csökkentjük 1-gyel
+        if (this.idokorlatInSeconds <= 0) {
+          clearInterval(this.idozitoId); // Időzítő leállítása
+          this.jatekVege(); // Játék vége metódus meghívása
+        }
+      }
+    }, 1000);
+
     this.kovetkezoKor();
     this.kartyakMegjelenitese();
   }
+
   // Befejezi a játékot
   jatekVege() {
     console.log("Vége a játéknak.");
@@ -290,5 +299,3 @@ const ujJatek = new Jatek(
 );
 
 ujJatek.jatekIndit();
-
-
