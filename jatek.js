@@ -248,7 +248,7 @@ class Kartya {
 
     setTimeout(() => {
       // Animacio felenek idejenel checkoljuk hogy melyik oldal lathato
-      if (this.kartyaDiv.dataset.status === 'rejtett') {
+      if (this.kartyaStatus.status === 'rejtett') {
         this.kepBeallitKartyanak('kerdojelKartya'); // Ha a rejtett oldal => kerdojelKartya
       } else {
         this.kepBeallitKartyanak(this.kartyaDiv.getAttribute("name")); // Ha mutatva van a kártya akkor a "name"
@@ -256,7 +256,7 @@ class Kartya {
 
       // Atmenet ujra
       this.kartyaDiv.style.transition = "transform 0.5s ease";
-      this.kartyaDiv.dataset.status = 'mutat';
+      this.kartyaStatus = 'mutat';
     }, 50);
   }
 
