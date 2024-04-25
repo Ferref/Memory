@@ -1,36 +1,21 @@
-// Játékosmód => Játék
-// Ez fogja összekapcsolni őket
-
-const tablameretGombok = document.querySelectorAll('#tablameret .navGomb');
-const idozitoGombok = document.querySelectorAll('#idozito .navGomb');
-const nehezsegGombok = document.querySelectorAll('#nehezseg .navGomb');
-
-tablameretGombok.forEach(gomb => {
-  gomb.addEventListener('click', function () {
-    tablameretGombok.forEach(gomb => {
-      gomb.classList.remove('kivalasztott');
+function gombokSotitese(gombok) {
+  gombok.forEach(gomb => {
+    gomb.addEventListener('click', function () {
+      gombok.forEach(gomb => {
+        gomb.classList.remove('kivalasztott');
+      });
+      this.classList.add('kivalasztott');
     });
-    this.classList.add('kivalasztott');
   });
-});
+}
 
-idozitoGombok.forEach(gomb => {
-  gomb.addEventListener('click', function () {
-    idozitoGombok.forEach(gomb => {
-      gomb.classList.remove('kivalasztott');
-    });
-    this.classList.add('kivalasztott');
-  });
-});
+const tablameretGombok = document.querySelectorAll('#tablameret button');
+const idozitoGombok = document.querySelectorAll('#idozito button');
+const nehezsegGombok = document.querySelectorAll('#nehezseg button');
 
-nehezsegGombok.forEach(gomb => {
-  gomb.addEventListener('click', function () {
-    nehezsegGombok.forEach(gomb => {
-      gomb.classList.remove('kivalasztott');
-    });
-    this.classList.add('kivalasztott');
-  });
-});
+gombokSotitese(tablameretGombok);
+gombokSotitese(idozitoGombok);
+gombokSotitese(nehezsegGombok);
 
 
 
