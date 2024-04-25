@@ -1,5 +1,3 @@
-import { nev1Input, nev2Input, jatekmod, tablameret, idozito, nehezseg } from './jatekmodKapcsol.js';
-
 class Jatek {
   // Játékos létrehozása
   constructor(
@@ -279,7 +277,18 @@ class Tabla {
   }
 }
 
-// jatekmodKapcsol.js-ből kapjuk meg
-const ujJatek = new Jatek(nev1Input, nev2Input, jatekmod, tablameret, idozito, nehezseg);
+// jatekmodKapcsol.js-ből kapjuk meg, oldal betöltődése után indul is
+
+const jatekAdatok = JSON.parse(window.localStorage.getItem('jatekAdatok'));
+const ujJatek = new Jatek(
+  jatekAdatok.jatekMod,
+  jatekAdatok.tablaMeret,
+  jatekAdatok.jatekosNev1,
+  jatekAdatok.jatekosNev2,
+  jatekAdatok.megadottIdozito,
+  jatekAdatok.megadottNehezseg
+);
+
 ujJatek.jatekIndit();
+
 

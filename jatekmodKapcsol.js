@@ -1,9 +1,11 @@
-let nev1Input;
-let nev2Input;
-let jatekmod;
-let tablameret;
-let idozito;
-let nehezseg;
+// jatekmodKapcsol.js
+
+let nev1Input = '';
+let nev2Input = '';
+let jatekmod = '';
+let tablameret = '';
+let idozito = '';
+let nehezseg = '';
 
 function gombokSotitese(gombok) {
   gombok.forEach(gomb => {
@@ -68,7 +70,15 @@ jatekInditasGombok.forEach(gomb => {
       jatekmod = window.location.pathname.split("/").pop().split(".")[0];
 
       // jatekAdatok létrehozása és exportálása
-      const jatekAdatok = { nev1Input, nev2Input, jatekmod, tablameret, idozito, nehezseg };
+      const jatekAdatok = {
+        jatekosNev1: nev1Input,
+        jatekosNev2: nev2Input,
+        jatekMod: jatekmod,
+        tablaMeret: tablameret,
+        megadottIdozito: idozito,
+        megadottNehezseg: nehezseg
+      };
+
       window.localStorage.setItem('jatekAdatok', JSON.stringify(jatekAdatok));
 
       window.location.href = this.getAttribute('href');
