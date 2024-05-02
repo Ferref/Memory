@@ -1,7 +1,23 @@
 // jatekmodKapcsol.js
 
-let nev1Input = '';
-let nev2Input = '';
+// Keresd meg az input mezőket
+const nev1Input = document.getElementById("nev1Input");
+const nev2Input = document.getElementById("nev2Input");
+
+// Adj hozzá eseménykezelőt a fókusz eseményhez az első input mezőhöz
+nev1Input.addEventListener('focus', function() {
+    // Töröld az input mező tartalmát
+    this.value = '';
+});
+
+// Adj hozzá eseménykezelőt a fókusz eseményhez a második input mezőhöz
+nev2Input.addEventListener('focus', function() {
+    // Töröld az input mező tartalmát
+    this.value = '';
+});
+
+let nev1InputValue = '';
+let nev2InputValue = '';
 let jatekmod = '';
 let tablameret = '';
 let idozito = '';
@@ -65,19 +81,15 @@ jatekInditasGombok.forEach(gomb => {
     event.preventDefault();
     if (kivalasztottEllenorzes()) {
       // Konstansok létrehozása
-      nev1Input = document.getElementById("nev1Input").value;
-      nev2Input = document.getElementById("nev2Input");
-      if (nev2Input) {
-        nev2Input = nev2Input.value;
-      } else {
-        nev2Input = "Nincs";
-      }
+      nev1InputValue = nev1Input.value;
+      nev2InputValue = nev2Input.value || "Nincs";
+
       jatekmod = window.location.pathname.split("/").pop().split(".")[0];
 
       // jatekAdatok létrehozása és exportálása
       const jatekAdatok = {
-        jatekosNev1: nev1Input,
-        jatekosNev2: nev2Input,
+        jatekosNev1: nev1InputValue,
+        jatekosNev2: nev2InputValue,
         jatekMod: jatekmod,
         tablaMeret: tablameret,
         megadottIdozito: idozito,
