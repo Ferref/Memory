@@ -1,3 +1,5 @@
+
+
 body {
   background: wheat;
   margin: 0 auto;
@@ -6,16 +8,18 @@ body {
   flex-direction: column;
   align-items: center;
   font-family: "Comic Sans MS", "Comic Sans", cursive;
+  cursor: url('kepek/cursor.cur'), auto;
 }
 
 #tabla{
   width: max-content;
   margin: 50px;
   display: grid;
-  grid-template-columns: repeat(4, 100px);
+  grid-template-columns: repeat(8, 100px);
   gap: 20px;
   border: 10px solid black;
   padding: 25px;
+  margin-bottom: -10px;
 }
 
 .kartya {
@@ -76,6 +80,7 @@ body {
 
 .navGomb:hover:after {
   transform: translate(0, 0);
+  cursor: url('kepek/cursor.cur'), auto;
 }
 
 .navGomb:active {
@@ -85,6 +90,7 @@ body {
 
 .navGomb:hover {
   outline: 0;
+  cursor: url('kepek/cursor.cur'), auto;
 }
 
 .kivalasztott {
@@ -98,6 +104,8 @@ body {
   }
 }
 
+
+
 .jatekmod {
   display: flex;
   flex-direction: row;
@@ -105,7 +113,7 @@ body {
   justify-content: center;
   margin-left: 200px;
   margin-right: 200px;
-  margin-bottom: 50px;
+  margin-bottom: 0px;
   padding: auto;
 }
 
@@ -146,6 +154,8 @@ img {vertical-align: middle;}
   position: relative;
   margin: auto;
   border: 10px solid black;
+  position : relative;
+  right: 20px;
 }
 
 /* Next & previous buttons */
@@ -159,6 +169,7 @@ img {vertical-align: middle;}
   transition: 0.5s ease;
   user-select: none;
   background-color: rgba(110, 110, 110, 0.3) ;
+  
 }
 .prev{
 left: 0;
@@ -185,10 +196,13 @@ left: 0;
   border-radius: 50%;
   display: inline-block;
   transition: background-color 0.5s ease;
+  position : relative;
+  right: 20px;
 }
 
 .active, .dot:hover {
   background-color: #111;
+  cursor: url('cursor.cur'), auto;
 }
 
 /* új betűméret*/
@@ -197,26 +211,57 @@ left: 0;
 }
 
 .labelFix{
-  margin-left: -34vh;
+  margin-left: 0vh;
 }
 
 .labelFix2{
-  margin-left: -15vh;
+  margin-left: 0vh;
 }
 
 .labelFix3{
-  margin-left: -38vh;
+  margin-left: 0vh;
 }
 
+
+#vissza, #jatek{
+  top:40px;
+}
+
+#konnyu_szoveg, #normal_szoveg, #nehez_szoveg{
+    right: 37px;
+}
+
+#nev2 {
+  position: relative;
+  top:10px
+}
 
 #container {
-  border: 80px solid transparent;
+  border: 150px solid transparent;
   border-image: url("kepek/style/border.png") 110 round;
+  border-image-slice: 33% ;
+  border-image-repeat: repeat;
+}
+
+.musicOn{
+  position: relative;
 }
 
 
-
-
+.lejatszo {
+  background-image: url(kepek/play.png);
+  width: 64px;
+  height: 64px;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: 0;
+  border-radius: 50%;
+  background-color: rgba(0,0,0,0.25);
+  margin: 0px;
+  padding:0px;
+ }
+ 
+ .lejatszo:active { background-color: rgba(255,255,255,0.25); }
 
 
 
