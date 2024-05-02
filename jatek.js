@@ -27,7 +27,7 @@ class Jatek {
       default:
         var jatekos2Div = document.getElementById("jatekos2Adatai");
         this.jatekos1 = new Jatekos(jatekosNev1, jatekos1Div, avatar1Src);
-        this.jatekos2 = new SzamitogepJatekos();
+        this.jatekos2 = new SzamitogepJatekos(jatekos2Div, avatar2Src);
         break;
     }
 
@@ -222,7 +222,7 @@ class Jatekos {
 }
 
 class SzamitogepJatekos extends Jatekos {
-  constructor() {
+  constructor(jatekosKep, avatarSrc) {
     super(SzamitogepJatekos.jatekosNevGeneral(), jatekosKep, avatarSrc);
   }
 
