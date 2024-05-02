@@ -283,5 +283,17 @@ left: 0;
 }
 
 
+.table-container {
+  display: flex;
+}
+
+.rank-table {
+  margin-right: 20px;
+}
+
+.rank-table th,
+.rank-table td {
+  padding: 10px;
+}
 
 
