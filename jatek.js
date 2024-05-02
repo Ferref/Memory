@@ -132,7 +132,6 @@ class Jatek {
     }
   }
 
-  // Átkapcsol a következő körre
 // Átkapcsol a következő körre
 kovetkezoKor() {
   this.korSzamlalo++;
