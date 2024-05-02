@@ -223,8 +223,6 @@ szamitogepJatszik() {
 
   // Befejezi a játékot
   jatekVege() {
-    console.log("Vége a játéknak.");
-  
     let gyoztes = "";
     if (this.jatekos1.pontok === this.jatekos2.pontok) {
       gyoztes = "Döntetlen";
@@ -232,16 +230,41 @@ szamitogepJatszik() {
       gyoztes = this.jatekos1.pontok > this.jatekos2.pontok ? this.jatekos1.jatekosNev : this.jatekos2.jatekosNev;
     }
   
-    // A győztes neve után hozzáadjuk, hogy "Nyert"
     gyoztes += " Nyert";
   
     document.getElementById('aktualisJatekosNev').innerText = gyoztes;
+
+    const top3 = JSON.parse(localStorage.getItem('top3')) || [];
+
+    const aktualisGyoztesPontszam = this.jatekos1.pontok > this.jatekos2.pontok ? this.jatekos1.pontok : this.jatekos2.pontok;
+    let top3baKerulhet = true;
+
+    for (const jatekos of top3) {
+      if (jatekos.name === gyoztes) {
+        if (aktualisGyoztesPontszam <= jatekos.score) {
+          top3baKerulhet = false;
+        } else {
+          jatekos.score = aktualisGyoztesPontszam;
+        }
+      }
+    }
+
+    if (top3baKerulhet) {
+      top3.push({ name: gyoztes, score: aktualisGyoztesPontszam });
+    }
+
+    top3.sort((a, b) => b.score - a.score);
+
+    const korlatozottTop3 = top3.slice(0, 3);
+
+    localStorage.setItem('top3', JSON.stringify(korlatozottTop3));
   
     setTimeout(() => {
-      // Várunk 5 másodpercet, majd dobunk a ranglista.html-re
       window.location.href = "ranglista.html";
     }, 5000);
-  }
+}
+
+
   
 }
 
