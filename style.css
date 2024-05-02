@@ -270,10 +270,11 @@ left: 0;
  
  .lejatszo:active { background-color: rgba(255,255,255,0.25); }
 
-
-
-
-
+.jatekos{
+  background-size: cover;
+  background-position: center;
+  border: 3px solid black;
+}
 
 
 
