@@ -5,22 +5,28 @@ class Jatek {
     jatekosNev1,
     jatekosNev2,
     idokorlat,
-    nehezseg
+    nehezseg,
+    avatar1Src,
+    avatar2Src
   ) {
     tablaMeret = Math.abs(Number(tablaMeret.split(" ")[0]));
     this.idokorlatInSeconds = Math.abs(Number(idokorlat.split(" ")[0])) * 60;
 
     // Játékmód kiválasztása
+    var jatekos1Div = document.getElementById("jatekos1Adatai");
+
     switch (jatekMod) {
       case "jatekosellen":
-        this.jatekos1 = new Jatekos(jatekosNev1);
-        this.jatekos2 = new Jatekos(jatekosNev2);
+        var jatekos2Div = document.getElementById("jatekos2Adatai");
+        this.jatekos1 = new Jatekos(jatekosNev1, jatekos1Div, avatar1Src);
+        this.jatekos2 = new Jatekos(jatekosNev2, jatekos2Div, avatar2Src);
         break;
       case "szolo":
-        this.jatekos1 = new Jatekos(jatekosNev1);
+        this.jatekos1 = new Jatekos(jatekosNev1, jatekos1Div, avatar1Src);
         break;
       default:
-        this.jatekos1 = new Jatekos(jatekosNev1);
+        var jatekos2Div = document.getElementById("jatekos2Adatai");
+        this.jatekos1 = new Jatekos(jatekosNev1, jatekos1Div, avatar1Src);
         this.jatekos2 = new SzamitogepJatekos();
         break;
     }
@@ -201,11 +207,12 @@ kovetkezoKor() {
 }
 
 class Jatekos {
-  constructor(jatekosNev) {
+  constructor(jatekosNev, jatekosKep, avatarSrc) {
     this.jatekosNev = jatekosNev;
     this.pontok = 0;
     this.varakozasAKovetkezoJatekosra = false;
     this.elozoTalalt = false;
+    jatekosKep.style.backgroundImage = `url(${avatarSrc})`;
   }
 
   // Hozzáadja a kártyákat a soron következő játékoshoz
@@ -328,7 +335,9 @@ const ujJatek = new Jatek(
   jatekAdatok.jatekosNev1,
   jatekAdatok.jatekosNev2,
   jatekAdatok.megadottIdozito,
-  jatekAdatok.megadottNehezseg
+  jatekAdatok.megadottNehezseg,
+  jatekAdatok.avatar1Src,
+  jatekAdatok.avatar2Src
 );
 
 ujJatek.jatekIndit();

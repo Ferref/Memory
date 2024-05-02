@@ -74,24 +74,34 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   jatekInditGomb.addEventListener('click', function (event) {
-      event.preventDefault();
-      if (kivalasztottEllenorzes()) {
-          nev1Input = document.getElementById("nev1Input").value.trim() || "Jatekos1";
-          nev2Input = document.getElementById("nev2Input")?.value.trim() || (document.querySelector('#nev2') ? "Jatekos2" : "Nincs"); // optional chaining for nev2Input
-          jatekmod = window.location.pathname.split("/").pop().split(".")[0];
+    event.preventDefault();
+    if (kivalasztottEllenorzes()) {
+        nev1Input = document.getElementById("nev1Input").value.trim() || "Játékos1";
+        nev2Input = document.getElementById("nev2Input")?.value.trim() || (document.querySelector('#nev2') ? "Játékos2" : "Nincs");
 
-          const jatekAdatok = {
-              jatekosNev1: nev1Input,
-              jatekosNev2: nev2Input,
-              jatekMod: jatekmod,
-              tablaMeret: tablameret,
-              megadottIdozito: idozito,
-              megadottNehezseg: nehezseg
-          };
+        jatekmod = window.location.pathname.split("/").pop().split(".")[0];
 
-          window.localStorage.setItem('jatekAdatok', JSON.stringify(jatekAdatok));
+        // Frissítjük az aktív képek src-jét
+        const avatar1ActiveSlide = document.querySelector('#avatar1 .mySlides .active img');
+        const avatar2ActiveSlide = document.querySelector('#avatar2 .mySlides .active img');
 
-          window.location.href = "jatek.html";
-      }
-  });
+        const jatekAdatok = {
+            jatekosNev1: nev1Input,
+            jatekosNev2: nev2Input,
+            jatekMod: jatekmod,
+            tablaMeret: tablameret,
+            megadottIdozito: idozito,
+            megadottNehezseg: nehezseg,
+            avatar1Src: avatar1ActiveSlide ? avatar1ActiveSlide.src : document.querySelector('#avatar1 .mySlides img').src,
+            avatar2Src: avatar2ActiveSlide ? avatar2ActiveSlide.src : document.querySelector('#avatar2 .mySlides img').src
+        };
+
+        window.localStorage.setItem('jatekAdatok', JSON.stringify(jatekAdatok));
+
+        window.location.href = "jatek.html";
+    }
+});
+
+
+
 });
