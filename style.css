@@ -24,11 +24,13 @@ body {
 
 .kartya {
   height: 125px;
+  width: 125px;
   cursor: pointer;
   border: 5px solid grey;
   background-size: cover;
   background-position: center;
-
+  margin: 5px;
+  box-sizing: content-box;
   /* Forditas animacio */
   transition: transform 0.25s ease;
 }

@@ -302,11 +302,12 @@ class Tabla {
     this.tablaMeret = tablaMeret;
     this.tablaDiv = document.getElementById("tabla");
 
-    // Állítsuk be a grid-template-columns és grid-template-rows CSS tulajdonságokat a tábla méretének megfelelően
-    this.tablaDiv.style.gridTemplateColumns = `repeat(${this.tablaMeret}, 1fr)`; // 1fr egységnyi hely minden oszlopnak
-    this.tablaDiv.style.gridTemplateRows = `repeat(${this.tablaMeret}, 1fr)`; // 1fr egységnyi hely minden sorban
+    // grid elosztás beállítása
+    this.tablaDiv.style.gridTemplateColumns = `repeat(${this.tablaMeret}, 125px)`;
+    this.tablaDiv.style.gridTemplateRows = `repeat(${this.tablaMeret}, 125px)`;
   }
 }
+
 
 
 // jatekmodKapcsol.js-ből kapjuk meg, oldal betöltődése után indul is
