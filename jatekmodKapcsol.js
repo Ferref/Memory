@@ -1,20 +1,15 @@
-// jatekmodKapcsol.js
-
-// Keresd meg az input mezőket
 const nev1Input = document.getElementById("nev1Input");
 const nev2Input = document.getElementById("nev2Input");
 
-// Adj hozzá eseménykezelőt a fókusz eseményhez az első input mezőhöz
 nev1Input.addEventListener('focus', function() {
-    // Töröld az input mező tartalmát
     this.value = '';
 });
 
-// Adj hozzá eseménykezelőt a fókusz eseményhez a második input mezőhöz
-nev2Input.addEventListener('focus', function() {
-    // Töröld az input mező tartalmát
+if (nev2Input !== null){
+  nev2Input.addEventListener('focus', function() {
     this.value = '';
-});
+  });
+}
 
 let nev1InputValue = '';
 let nev2InputValue = '';
@@ -71,8 +66,20 @@ function kivalasztottEllenorzes() {
     // Ha nincs #nehezseg elemünk az oldalon, akkor azonnal állítsuk "Nincs"-re
     nehezseg = "Nincs";
   }
+  
+  // Ellenőrizzük, hogy nev2Input értéke null vagy üres-e
+  nev2InputValue = nev2Input ? nev2Input.value.trim() : "Nincs"; // Töröljük a felesleges szóközöket a kezdet és a végéről
+  
+  // Ha a nev2Input üres, akkor állítsuk "Nincs"-re
+  if (!nev2InputValue) {
+    nev2InputValue = "Nincs";
+  }
+
+  // Táblaméret legyen az aktuálisan kiválasztott érték
+  tablameret = kivalasztottTablameret.textContent;
   return true;
 }
+
 
 const jatekInditasGombok = document.querySelectorAll('#gombok a[href="jatek.html"]');
 
@@ -82,7 +89,7 @@ jatekInditasGombok.forEach(gomb => {
     if (kivalasztottEllenorzes()) {
       // Konstansok létrehozása
       nev1InputValue = nev1Input.value;
-      nev2InputValue = nev2Input.value || "Nincs";
+      nev2InputValue = nev2Input ? nev2Input.value || "Nincs" : "Nincs";
 
       jatekmod = window.location.pathname.split("/").pop().split(".")[0];
 

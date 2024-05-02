@@ -9,7 +9,6 @@ class Jatek {
     nehezseg
   ) {
     this.tablaMeret = Math.abs(Number(tablaMeret.split(" ")[0]));
-    this.tablaMeret = this.tablaMeret % 2 === 0 ? this.tablaMeret : this.tablaMeret - 1;
     this.idokorlatInSeconds = Math.abs(Number(idokorlat.split(" ")[0])) * 60;
 
     // Játékmód kiválasztása
@@ -292,6 +291,10 @@ class Tabla {
   constructor(tablaMeret) {
     this.tablaMeret = tablaMeret;
     this.tablaDiv = document.getElementById("tabla");
+
+    // Állítsuk be a grid-template-columns CSS tulajdonságot a tábla méretének megfelelően
+    this.tablaDiv.style.gridTemplateColumns = `repeat(${this.tablaMeret})`;
+    this.tablaDiv.style.gridTemplateRows = `repeat(${this.tablaMeret})`;
   }
 }
 
