@@ -8,7 +8,7 @@ class Jatek {
     idokorlat,
     nehezseg
   ) {
-    this.tablaMeret = Math.abs(Number(tablaMeret.split(" ")[0]));
+    tablaMeret = Math.abs(Number(tablaMeret.split(" ")[0]));
     this.idokorlatInSeconds = Math.abs(Number(idokorlat.split(" ")[0])) * 60;
 
     // Játékmód kiválasztása
@@ -26,9 +26,9 @@ class Jatek {
         break;
     }
 
-    this.tabla = new Tabla(this.tablaMeret);
+    this.tabla = new Tabla(tablaMeret);
     this.kartyak = [];
-    this.kartyaVanMeg = this.tablaMeret * this.tablaMeret;
+    this.kartyaVanMeg = tablaMeret * tablaMeret;
     this.korSzamlalo = 0;
     this.aktivLapok = [];
     this.kieertekelesTortenik = false;
@@ -44,7 +44,7 @@ class Jatek {
 
   // Legenerálja nekünk a kártyákat
   kartyakGeneral() {
-    const hanyKepKell = this.tablaMeret * this.tablaMeret / 2;
+    const hanyKepKell = this.tabla.tablaMeret * this.tabla.tablaMeret / 2;
     const kepIndexek = [];
 
     for (let i = 0; i < hanyKepKell; i++) {
@@ -104,9 +104,19 @@ class Jatek {
   // Megjeleníti a táblán a kárytákat
   kartyakMegjelenitese() {
     for (let i = 0; i < this.kartyak.length; i++) {
+      // Kiszámoljuk az aktuális oszlop- és sorszámot az arányos elhelyezéshez
+      const row = Math.floor(i / this.tabla.tablaMeret);
+      const col = i % this.tabla.tablaMeret;
+  
+      // Beállítjuk a kártya elhelyezését a táblán
+      this.kartyak[i].kartyaDiv.style.gridColumn = col + 1; // Oszlopszám kezdőértéke 1
+      this.kartyak[i].kartyaDiv.style.gridRow = row + 1; // Sorszám kezdőértéke 1
+  
+      // Hozzáadjuk a kártyát a táblához
       this.tabla.tablaDiv.appendChild(this.kartyak[i].kartyaDiv);
     }
   }
+  
 
   // Megnézi hogy egyeznek-e a kártyák
   aktivKartyakEgyeznek() {
@@ -292,11 +302,12 @@ class Tabla {
     this.tablaMeret = tablaMeret;
     this.tablaDiv = document.getElementById("tabla");
 
-    // Állítsuk be a grid-template-columns CSS tulajdonságot a tábla méretének megfelelően
-    this.tablaDiv.style.gridTemplateColumns = `repeat(${this.tablaMeret})`;
-    this.tablaDiv.style.gridTemplateRows = `repeat(${this.tablaMeret})`;
+    // Állítsuk be a grid-template-columns és grid-template-rows CSS tulajdonságokat a tábla méretének megfelelően
+    this.tablaDiv.style.gridTemplateColumns = `repeat(${this.tablaMeret}, 1fr)`; // 1fr egységnyi hely minden oszlopnak
+    this.tablaDiv.style.gridTemplateRows = `repeat(${this.tablaMeret}, 1fr)`; // 1fr egységnyi hely minden sorban
   }
 }
+
 
 // jatekmodKapcsol.js-ből kapjuk meg, oldal betöltődése után indul is
 
