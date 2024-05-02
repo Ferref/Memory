@@ -1,5 +1,4 @@
 class Jatek {
-  // Játékos létrehozása
   constructor(
     jatekMod,
     tablaMeret,
@@ -128,62 +127,72 @@ class Jatek {
   }
 
   // Átkapcsol a következő körre
-  kovetkezoKor() {
-    this.korSzamlalo++;
-    console.log("\n\n\nK Ö R: " + this.korSzamlalo);
-    console.log("#########" + this.aktivJatekos.jatekosNev + "#########");
+// Átkapcsol a következő körre
+kovetkezoKor() {
+  this.korSzamlalo++;
+  console.log("\n\n\nK Ö R: " + this.korSzamlalo);
+  console.log("#########" + this.aktivJatekos.jatekosNev + "#########");
 
-    if (this.korSzamlalo > 1) {
-      // Váltogat a két játékosunk között
-      // Szóló módban nem kell váltogatni
+  if (this.korSzamlalo > 1) {
+    // Váltogat a két játékosunk között
+    // Szóló módban nem kell váltogatni
 
-      if (this.jatekMod != "szolo") {
+    if (this.jatekMod != "szolo") {
 
-        // Ha nem talált az előző kártyakombináció akkor a másik játékos jön
+      // Ha nem talált az előző kártyakombináció akkor a másik játékos jön
 
-        if (!this.aktivJatekos.elozoTalalt) {
-          if (this.aktivJatekos === this.jatekos1) {
-            this.aktivJatekos = this.jatekos2;
-          } else if (this.aktivJatekos === this.jatekos2) {
-            this.aktivJatekos = this.jatekos1;
-          }
+      if (!this.aktivJatekos.elozoTalalt) {
+        if (this.aktivJatekos === this.jatekos1) {
+          this.aktivJatekos = this.jatekos2;
+        } else if (this.aktivJatekos === this.jatekos2) {
+          this.aktivJatekos = this.jatekos1;
         }
       }
-
-      if (this.aktivKartyakEgyeznek()) {
-        console.log("Kártyák egyeznek!");
-
-        this.aktivJatekos.kartyaFelvesz();
-        this.aktivJatekos.elozoTalalt = true;
-
-        for (let i = 0; i < this.aktivLapok.length; i++) {
-          this.aktivLapok[i].kartyaKiment();
-        }
-
-        let firstIndexOfMegtalalt = this.kartyak.indexOf(this.aktivLapok[0]);
-        let lastIndexOfMegtalalt = this.kartyak.indexOf(this.aktivLapok[1]);
-
-        this.kartyak.splice(firstIndexOfMegtalalt, 1);
-        this.kartyak.splice(lastIndexOfMegtalalt, 1);
-
-        this.kartyaVanMeg -= 2;
-      } else {
-        console.log("Kártyák nem egyeznek");
-        for (let i = 0; i < this.aktivLapok.length; i++) {
-          this.aktivLapok[i].kartyaElrejt();
-        }
-      }
-
-      // Ha nincs már kártya vége a dalnak
-      if (this.kartyaVanMeg === 0) {
-        this.jatekVege();
-      }
-
-      this.aktivLapok = [];
     }
 
-    this.kieertekelesTortenik = false;
+    if (this.aktivKartyakEgyeznek()) {
+      console.log("Kártyák egyeznek!");
+
+      this.aktivJatekos.kartyaFelvesz();
+      this.aktivJatekos.elozoTalalt = true;
+
+      for (let i = 0; i < this.aktivLapok.length; i++) {
+        this.aktivLapok[i].kartyaKiment();
+      }
+
+      let firstIndexOfMegtalalt = this.kartyak.indexOf(this.aktivLapok[0]);
+      let lastIndexOfMegtalalt = this.kartyak.indexOf(this.aktivLapok[1]);
+
+      this.kartyak.splice(firstIndexOfMegtalalt, 1);
+      this.kartyak.splice(lastIndexOfMegtalalt, 1);
+
+      this.kartyaVanMeg -= 2;
+    } else {
+      console.log("Kártyák nem egyeznek");
+      for (let i = 0; i < this.aktivLapok.length; i++) {
+        this.aktivLapok[i].kartyaElrejt();
+      }
+    }
+
+    // Ha nincs már kártya vége a dalnak
+    if (this.kartyaVanMeg === 0) {
+      this.jatekVege();
+    }
+
+    this.aktivLapok = [];
   }
+
+  // Frissítjük a játékos adatait az oldalon
+  document.getElementById('jatekos1Adatai').querySelector('.jatekosNev').textContent = this.jatekos1.jatekosNev;
+  document.getElementById('jatekos1Adatai').querySelector('.jatekosPontok').textContent = 'Pontok: ' + this.jatekos1.pontok;
+  if (this.jatekos2) {
+    document.getElementById('jatekos2Adatai').querySelector('.jatekosNev').textContent = this.jatekos2.jatekosNev;
+    document.getElementById('jatekos2Adatai').querySelector('.jatekosPontok').textContent = 'Pontok: ' + this.jatekos2.pontok;
+  }
+
+  this.kieertekelesTortenik = false;
+}
+
 
   // Befejezi a játékot
   jatekVege() {
@@ -324,4 +333,3 @@ const ujJatek = new Jatek(
 
 ujJatek.jatekIndit();
 console.log(ujJatek);
-//
