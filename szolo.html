@@ -14,7 +14,7 @@
 <body>
     <h1>Memory</h1>
     <div id="container">
-        <h1>Szólójáték </h1><br>
+        <h1>Szólójáték</h1><br>
         <div class="divek">
             <div id="avatar">
                 <div class="slideshow-container">
@@ -38,8 +38,8 @@
                         <img class="avatar" src="kepek/avatar/avatar5.jpg">
                     </div>
 
-                    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-                    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                    <a class="prev" onclick="plusSlides(-1); buttonclick()">&#10094;</a>
+                    <a class="next" onclick="plusSlides(1); buttonclick()">&#10095;</a>
                 </div>
                 <div>
                     <span class="dot" onclick="currentSlide(1)"></span>
@@ -53,29 +53,36 @@
                 <div class="pls">
                     <div id="nev">
                         <label class="labelFix" for="nev1">Játékosnév</label><br><br>
-                        <input class="labelFix2" type="text" id="nev1Input" value="Játékos">
+                        <input class="labelFix2" type="text" id="nev1Input" value="Játékos1">
                     </div>
                     <p class="labelFix3">Táblaméret</p>
                 </div>
 
                 <div id="tablameret">
-                    <button id="konnyu" class="navGomb">4 x 4</button>
-                    <button id="normal" class="navGomb">6 x 6</button>
-                    <button id="nehez" class="navGomb">8 x 8</button>
+                    <button id="konnyu" class="navGomb" onclick="buttonclick()">4 x 4</button>
+                    <button id="normal" class="navGomb" onclick="buttonclick()">6 x 6</button>
+                    <button id="nehez" class="navGomb" onclick="buttonclick()">8 x 8</button>
                     <p class="labelFix4">Időzítő</p>
                 </div>
 
                 <div id="idozito">
-                    <button id="10p" class="navGomb">10 perc</button>
-                    <button id="20p" class="navGomb">20 perc</button>
-                    <button id="30p" class="navGomb">30 perc</button>
+                    <button id="10p" class="navGomb" onclick="buttonclick()">10 perc</button>
+                    <button id="20p" class="navGomb" onclick="buttonclick()">20 perc</button>
+                    <button id="30p" class="navGomb" onclick="buttonclick()">30 perc</button>
+                    <p class="labelFix3">Nehézség</p>
+                </div>
+
+                <div id="nehezseg">
+                    <button id="konnyu_szoveg" class="navGomb" onclick="buttonclick()">Könnyű</button>
+                    <button id="normal_szoveg" class="navGomb" onclick="buttonclick()">Normál</button>
+                    <button id="nehez_szoveg" class="navGomb" onclick="buttonclick()">Nehéz</button>
                 </div>
             </div>
         </div>
         <br>
         <div id="gombok">
-            <a href="index.html"><button class="navGomb">Vissza</button></a>
-            <a href="jatek.html"><button class="navGomb">Játék</button></a>
+            <a onclick="return makeSound('index.html')" href="#"><button id="vissza" class="navGomb">Vissza</button></a>
+            <a onclick="return makeSoundCheck('jatek.html')" href="#"><button id="jatek" class="navGomb">Játék indítása</button></a>
         </div>
         <div id="jatek"></div>
     </div>

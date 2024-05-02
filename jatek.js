@@ -311,4 +311,5 @@ const ujJatek = new Jatek(
 );
 
 ujJatek.jatekIndit();
+console.log(ujJatek);
 //
