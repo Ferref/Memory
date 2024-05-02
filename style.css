@@ -245,6 +245,11 @@ left: 0;
   border-image-repeat: repeat;
 }
 
+#jatekContainer{
+  display: flex;
+  flex-direction: row;
+}
+
 .musicOn{
   position: relative;
 }
