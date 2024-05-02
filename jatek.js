@@ -200,7 +200,7 @@ kovetkezoKor() {
     document.getElementById('jatekos2Adatai').querySelector('.jatekosNev').textContent = this.jatekos2.jatekosNev;
     document.getElementById('jatekos2Adatai').querySelector('.jatekosPontok').textContent = 'Pontok: ' + this.jatekos2.pontok;
   }
-
+  document.getElementById("aktualisJatekosNev").innerText = this.aktivJatekos.jatekosNev;
   this.kieertekelesTortenik = false;
 }
 
