@@ -2,107 +2,81 @@
 <html lang="hu">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
-  <title>Készítők</title>
-  <link rel="icon" type="image/x-icon" href="kepek/cat.png">
-  <script src="jatekHangok.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Készítők</title>
+    <link rel="icon" type="image/x-icon" href="kepek/cat.png">
+    <script src="ranglistaBetolt.js" defer></script>
 </head>
 
 <body>
-  <h1>Memory</h1>
-  <div id="container">
-    <h1>Ranglista</h1>
-    <div class="table-container">
-      <table class="rank-table">
-        <caption>PvP</caption>
-        <tr>
-          <th>Név</th>
-          <th>Pont</th>
-        </tr>
-        <tr>
-          <td>-</td>
-          <td>-</td>
-        </tr>
-        <tr>
-          <td>-</td>
-          <td>-</td>
-        </tr>
-        <tr>
-          <td>-</td>
-          <td>-</td>
-        </tr>
-        <!-- Alapértelmezett értékek -->
-        <tr>
-          <td>-</td>
-          <td>-</td>
-        </tr>
-        <tr>
-          <td>-</td>
-          <td>-</td>
-        </tr>
-      </table>
-      <table class="rank-table">
-        <caption>Pc ellen</caption>
-        <tr>
-          <th>Név</th>
-          <th>Pont</th>
-        </tr>
-        <tr>
-          <td>-</td>
-          <td>-</td>
-        </tr>
-        <tr>
-          <td>-</td>
-          <td>-</td>
-        </tr>
-        <tr>
-          <td>-</td>
-          <td>-</td>
-        </tr>
-        <!-- Alapértelmezett értékek -->
-        <tr>
-          <td>-</td>
-          <td>-</td>
-        </tr>
-        <tr>
-          <td>-</td>
-          <td>-</td>
-        </tr>
-      </table>
-      <table class="rank-table">
-        <caption>Szóló</caption>
-        <tr>
-          <th>Név</th>
-          <th>Pont</th>
-        </tr>
-        <tr>
-          <td>-</td>
-          <td>-</td>
-        </tr>
-        <tr>
-          <td>-</td>
-          <td>-</td>
-        </tr>
-        <tr>
-          <td>-</td>
-          <td>-</td>
-        </tr>
-        <!-- Alapértelmezett értékek -->
-        <tr>
-          <td>-</td>
-          <td>-</td>
-        </tr>
-        <tr>
-          <td>-</td>
-          <td>-</td>
-        </tr>
-      </table>
+    <h1>Memory</h1>
+    <div id="container">
+        <h1>Ranglista</h1>
+        <div class="table-container">
+            <table id="pvp-table" class="rank-table">
+                <caption>PvP</caption>
+                <tr>
+                    <th>Név</th>
+                    <th>Pont</th>
+                </tr>
+                <tr>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+            </table>
+            <table id="pc-table" class="rank-table">
+                <caption>Pc ellen</caption>
+                <tr>
+                    <th>Név</th>
+                    <th>Pont</th>
+                </tr>
+                <tr>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+            </table>
+            <table id="solo-table" class="rank-table">
+                <caption>Szóló</caption>
+                <tr>
+                    <th>Név</th>
+                    <th>Pont</th>
+                </tr>
+                <tr>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+            </table>
+        </div>
+        <a href="index.html"><button class="navGomb">Vissza</button></a>
+        <div id="jatek"></div>
     </div>
-    <a href="index.html"><button class="navGomb">Vissza</button></a>
-    <div id="jatek"></div>
-  </div>
+
 </body>
 
 </html>
