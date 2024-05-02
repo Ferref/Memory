@@ -223,7 +223,7 @@ class Jatekos {
 
 class SzamitogepJatekos extends Jatekos {
   constructor() {
-    super(SzamitogepJatekos.jatekosNevGeneral());
+    super(SzamitogepJatekos.jatekosNevGeneral(), jatekosKep, avatarSrc);
   }
 
   // Nevet generál ha számítógép a játékos
