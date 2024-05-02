@@ -224,7 +224,25 @@ szamitogepJatszik() {
   // Befejezi a játékot
   jatekVege() {
     console.log("Vége a játéknak.");
+  
+    let gyoztes = "";
+    if (this.jatekos1.pontok === this.jatekos2.pontok) {
+      gyoztes = "Döntetlen";
+    } else {
+      gyoztes = this.jatekos1.pontok > this.jatekos2.pontok ? this.jatekos1.jatekosNev : this.jatekos2.jatekosNev;
+    }
+  
+    // A győztes neve után hozzáadjuk, hogy "Nyert"
+    gyoztes += " Nyert";
+  
+    document.getElementById('aktualisJatekosNev').innerText = gyoztes;
+  
+    setTimeout(() => {
+      // Várunk 5 másodpercet, majd dobunk a ranglista.html-re
+      window.location.href = "ranglista.html";
+    }, 5000);
   }
+  
 }
 
 class Jatekos {
