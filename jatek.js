@@ -27,7 +27,7 @@ class Jatek {
       default:
         var jatekos2Div = document.getElementById("jatekos2Adatai");
         this.jatekos1 = new Jatekos(jatekosNev1, jatekos1Div, avatar1Src);
-        this.jatekos2 = new SzamitogepJatekos(jatekos2Div, avatar2Src);
+        this.jatekos2 = new SzamitogepJatekos(jatekos2Div, avatar2Src, nehezseg, tablaMeret);
         break;
     }
 
@@ -106,7 +106,7 @@ class Jatek {
     }
   }
 
-  // Megjeleníti a táblán a kárytákat
+  // Megjeleníti a táblán a kártyákat
   kartyakMegjelenitese() {
     for (let i = 0; i < this.kartyak.length; i++) {
       // Kiszámoljuk az aktuális oszlop- és sorszámot az arányos elhelyezéshez
@@ -156,6 +156,11 @@ kovetkezoKor() {
       }
     }
 
+    if (this.aktivJatekos instanceof SzamitogepJatekos) {
+      // Számítógép jön, hívjuk meg a szükséges metódusokat
+      this.szamitogepJatszik();
+    }
+
     if (this.aktivKartyakEgyeznek()) {
       console.log("Kártyák egyeznek!");
 
@@ -199,6 +204,22 @@ kovetkezoKor() {
   this.kieertekelesTortenik = false;
 }
 
+// Számítógép játssza a kört
+szamitogepJatszik() {
+  const randomIndex1 = Math.floor(Math.random() * this.kartyak.length);
+  let randomIndex2 = Math.floor(Math.random() * this.kartyak.length);
+
+  // Biztosítsuk, hogy a két véletlenszerűen kiválasztott kártya különböző legyen
+  while (randomIndex1 === randomIndex2) {
+    randomIndex2 = Math.floor(Math.random() * this.kartyak.length);
+  }
+
+  // Szimuláljuk a két kártya megnyomását
+  this.kartyak[randomIndex1].kartyaDiv.click();
+  this.kartyak[randomIndex2].kartyaDiv.click();
+}
+
+
 
   // Befejezi a játékot
   jatekVege() {
@@ -222,8 +243,9 @@ class Jatekos {
 }
 
 class SzamitogepJatekos extends Jatekos {
-  constructor(jatekosKep, avatarSrc) {
+  constructor(jatekosKep, avatarSrc, nehezseg, tablaMeret) {
     super(SzamitogepJatekos.jatekosNevGeneral(), jatekosKep, avatarSrc);
+    this.memoria = this.initMemoria(nehezseg, tablaMeret);
   }
 
   // Nevet generál ha számítógép a játékos
@@ -232,6 +254,32 @@ class SzamitogepJatekos extends Jatekos {
     var lehetsegesJatekosNev = lehetsegesJatekosNevek[Math.floor(Math.random() * lehetsegesJatekosNevek.length)];
 
     return lehetsegesJatekosNev;
+  }
+
+  // Memória inicializálása a számítógépes játékos számára
+  initMemoria(nehezseg, tablaMeret) {
+    let memoriMeret;
+    switch (nehezseg) {
+      case "konnyu":
+        memoriMeret = 3;
+        break;
+      case "kozepes":
+        memoriMeret = 5;
+        break;
+      case "nehez":
+        memoriMeret = 7;
+        break;
+      default:
+        memoriMeret = 5; // Alapértelmezett méret
+    }
+
+    const memoria = new Set();
+    while (memoria.size < memoriMeret) {
+      const randomIndex = Math.floor(Math.random() * tablaMeret * tablaMeret);
+      memoria.add(randomIndex);
+    }
+
+    return memoria;
   }
 }
 
