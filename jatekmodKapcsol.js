@@ -82,8 +82,11 @@ document.addEventListener('DOMContentLoaded', function() {
             jatekmod = window.location.pathname.split("/").pop().split(".")[0];
 
             // Frissítjük az aktív képek src-jét
-            const avatar1ActiveSlide = document.querySelector('#avatar1 .mySlides .active img');
-            const avatar2ActiveSlide = document.querySelector('#avatar2') ? document.querySelector('#avatar2 .mySlides .active img') : null;
+            const avatar1ActiveSlide = document.querySelector('#avatar1 .mySlides[style*="display: block"] img');
+            const avatar2ActiveSlide = document.querySelector('#avatar2 .mySlides[style*="display: block"] img');
+
+            const avatar1Src = avatar1ActiveSlide ? avatar1ActiveSlide.src : null;
+            const avatar2Src = avatar2ActiveSlide ? avatar2ActiveSlide.src : null;
 
             const jatekAdatok = {
                 jatekosNev1: nev1Input,
@@ -92,8 +95,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 tablaMeret: tablameret,
                 megadottIdozito: idozito,
                 megadottNehezseg: nehezseg,
-                avatar1Src: avatar1ActiveSlide ? avatar1ActiveSlide.src : document.querySelector('#avatar1 .mySlides img').src,
-                avatar2Src: avatar2ActiveSlide ? avatar2ActiveSlide.src : null
+                avatar1Src: avatar1Src,
+                avatar2Src: avatar2Src
             };
 
             window.localStorage.setItem('jatekAdatok', JSON.stringify(jatekAdatok));
