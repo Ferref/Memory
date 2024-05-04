@@ -1,10 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     const top3 = JSON.parse(localStorage.getItem('top3')) || [];
+    const top3Table = document.getElementById('top3-table');
 
-    const pvpTable = document.getElementById('pvp-table');
-    const pcTable = document.getElementById('pc-table');
-    const soloTable = document.getElementById('solo-table');
-    
     function fillTable(table, data) {
         for (let i = 0; i < data.length; i++) {
             if (i < 3) {
@@ -14,7 +11,5 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    fillTable(pvpTable, top3);
-    fillTable(pcTable, top3);
-    fillTable(soloTable, top3);
+    fillTable(top3Table, top3);
 });

@@ -1,36 +1,16 @@
 class Jatek {
   constructor(
-    jatekMod,
     tablaMeret,
     jatekosNev1,
     jatekosNev2,
     idokorlat,
-    nehezseg,
     avatar1Src,
     avatar2Src
   ) {
     tablaMeret = Math.abs(Number(tablaMeret.split(" ")[0]));
-    this.idokorlatInSeconds = Math.abs(Number(idokorlat.split(" ")[0])) * 60;
-
-    // Játékmód kiválasztása
-    var jatekos1Div = document.getElementById("jatekos1Adatai");
-
-    switch (jatekMod) {
-      case "jatekosellen":
-        var jatekos2Div = document.getElementById("jatekos2Adatai");
-        this.jatekos1 = new Jatekos(jatekosNev1, jatekos1Div, avatar1Src);
-        this.jatekos2 = new Jatekos(jatekosNev2, jatekos2Div, avatar2Src);
-        break;
-      case "szolo":
-        this.jatekos1 = new Jatekos(jatekosNev1, jatekos1Div, avatar1Src);
-        break;
-      default:
-        var jatekos2Div = document.getElementById("jatekos2Adatai");
-        this.jatekos1 = new Jatekos(jatekosNev1, jatekos1Div, avatar1Src);
-        this.jatekos2 = new SzamitogepJatekos(jatekos2Div, avatar2Src, nehezseg, tablaMeret);
-        break;
-    }
-
+    this.idokorlatInSeconds = idokorlat ? Math.abs(Number(idokorlat.split(" ")[0])) * 60 : 0;
+    this.jatekos1 = new Jatekos(jatekosNev1, document.getElementById("jatekos1Adatai"), avatar1Src);
+    this.jatekos2 = new Jatekos(jatekosNev2, document.getElementById("jatekos2Adatai"), avatar2Src);
     this.tabla = new Tabla(tablaMeret);
     this.kartyak = [];
     this.kartyaVanMeg = tablaMeret * tablaMeret;
@@ -38,7 +18,6 @@ class Jatek {
     this.aktivLapok = [];
     this.kieertekelesTortenik = false;
     this.aktivJatekos = null;
-    this.nehezseg = nehezseg;
 
     this.jatekForrasok = {
       kartyaKepek: 'kepek/kartyak/',
@@ -139,13 +118,9 @@ kovetkezoKor() {
   console.log("#########" + this.aktivJatekos.jatekosNev + "#########");
 
   if (this.korSzamlalo > 1) {
-    // Váltogat a két játékosunk között
     // Szóló módban nem kell váltogatni
-
-    if (this.jatekMod != "szolo") {
-
+    if (this.jatekMod !== "szolo") {
       // Ha nem talált az előző kártyakombináció akkor a másik játékos jön
-
       if (!this.aktivJatekos.elozoTalalt) {
         if (this.aktivJatekos === this.jatekos1) {
           this.aktivJatekos = this.jatekos2;
@@ -153,11 +128,6 @@ kovetkezoKor() {
           this.aktivJatekos = this.jatekos1;
         }
       }
-    }
-
-    if (this.aktivJatekos instanceof SzamitogepJatekos) {
-      // Számítógép jön, hívjuk meg a szükséges metódusokat
-      this.szamitogepJatszik();
     }
 
     if (this.aktivKartyakEgyeznek()) {
@@ -203,23 +173,6 @@ kovetkezoKor() {
   this.kieertekelesTortenik = false;
 }
 
-// Számítógép játssza a kört
-szamitogepJatszik() {
-  const randomIndex1 = Math.floor(Math.random() * this.kartyak.length);
-  let randomIndex2 = Math.floor(Math.random() * this.kartyak.length);
-
-  // Biztosítsuk, hogy a két véletlenszerűen kiválasztott kártya különböző legyen
-  while (randomIndex1 === randomIndex2) {
-    randomIndex2 = Math.floor(Math.random() * this.kartyak.length);
-  }
-
-  // Szimuláljuk a két kártya megnyomását
-  this.kartyak[randomIndex1].kartyaDiv.click();
-  this.kartyak[randomIndex2].kartyaDiv.click();
-}
-
-
-
   // Befejezi a játékot
   jatekVege() {
     let gyoztes = "";
@@ -262,9 +215,6 @@ szamitogepJatszik() {
       window.location.href = "ranglista.html";
     }, 5000);
 }
-
-
-  
 }
 
 class Jatekos {
@@ -276,52 +226,11 @@ class Jatekos {
     jatekosKep.style.backgroundImage = `url(${avatarSrc})`;
   }
 
-  // Hozzáadja a kártyákat a soron következő játékoshoz
   kartyaFelvesz() {
     this.pontok++;
   }
 }
 
-class SzamitogepJatekos extends Jatekos {
-  constructor(jatekosKep, avatarSrc, nehezseg, tablaMeret) {
-    super(SzamitogepJatekos.jatekosNevGeneral(), jatekosKep, avatarSrc);
-    this.memoria = this.initMemoria(nehezseg, tablaMeret);
-  }
-
-  // Nevet generál ha számítógép a játékos
-  static jatekosNevGeneral() {
-    var lehetsegesJatekosNevek = ["Béla", "Tibi", "Ottó", "Anna", "Niki", "Zsolti", "Alfréd"];
-    var lehetsegesJatekosNev = lehetsegesJatekosNevek[Math.floor(Math.random() * lehetsegesJatekosNevek.length)];
-
-    return lehetsegesJatekosNev;
-  }
-
-  // Memória inicializálása a számítógépes játékos számára
-  initMemoria(nehezseg, tablaMeret) {
-    let memoriMeret;
-    switch (nehezseg) {
-      case "konnyu":
-        memoriMeret = 3;
-        break;
-      case "kozepes":
-        memoriMeret = 5;
-        break;
-      case "nehez":
-        memoriMeret = 7;
-        break;
-      default:
-        memoriMeret = 5; // Alapértelmezett méret
-    }
-
-    const memoria = new Set();
-    while (memoria.size < memoriMeret) {
-      const randomIndex = Math.floor(Math.random() * tablaMeret * tablaMeret);
-      memoria.add(randomIndex);
-    }
-
-    return memoria;
-  }
-}
 
 class Kartya {
   constructor(name) {
@@ -332,7 +241,7 @@ class Kartya {
 
     this.kartyaDiv.onclick = () => {
       if (this.kartyaStatus === 'mutat' || ujJatek.kieertekelesTortenik || this.kartyaStatus === 'kiment') {
-        return; // Ha a státusz "kiment", ne csináljon semmit
+        return;
       }
 
       if (this.kartyaStatus === 'rejtett') {
@@ -351,7 +260,6 @@ class Kartya {
       }
     }
 
-    // Ha vége az animációnak
     this.kartyaDiv.addEventListener('transitionend', () => {
       this.kartyaDiv.style.transition = '';
     });
@@ -412,21 +320,16 @@ class Tabla {
   }
 }
 
-
-
 // jatekmodKapcsol.js-ből kapjuk meg, oldal betöltődése után indul is
 
 const jatekAdatok = JSON.parse(window.localStorage.getItem('jatekAdatok'));
 const ujJatek = new Jatek(
-  jatekAdatok.jatekMod,
   jatekAdatok.tablaMeret,
   jatekAdatok.jatekosNev1,
   jatekAdatok.jatekosNev2,
-  jatekAdatok.megadottIdozito,
-  jatekAdatok.megadottNehezseg,
+  jatekAdatok.idokorlat,
   jatekAdatok.avatar1Src,
   jatekAdatok.avatar2Src
 );
 
 ujJatek.jatekIndit();
-console.log(ujJatek);
