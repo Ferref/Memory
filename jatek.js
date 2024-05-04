@@ -1,3 +1,5 @@
+// jatek.js
+
 class Jatek {
   constructor(
     tablaMeret,
@@ -112,12 +114,12 @@ class Jatek {
     }
   }
 
-// Átkapcsol a következő körre
-kovetkezoKor() {
+  // Átkapcsol a következő körre
+  kovetkezoKor() {
     // Jatekosinfok Update
     this.korSzamlalo++;
 
-  if (this.korSzamlalo > 1) {
+    if (this.korSzamlalo > 1) {
 
       if (this.aktivKartyakEgyeznek()) {
 
@@ -149,7 +151,7 @@ kovetkezoKor() {
 
       this.aktivLapok = [];
 
-    if (!this.aktivJatekos.elozoTalalt) {
+      if (!this.aktivJatekos.elozoTalalt) {
           if(this.aktivJatekos === this.jatekos1){
             this.aktivJatekos = this.jatekos2;
           }
@@ -167,11 +169,8 @@ kovetkezoKor() {
 
     document.getElementById("aktualisJatekosNev").innerText = this.aktivJatekos.jatekosNev;
 
-
-      this.kieertekelesTortenik = false;
-}
-
-
+    this.kieertekelesTortenik = false;
+  }
 
   // Befejezi a játékot
   jatekVege() {
@@ -215,11 +214,6 @@ kovetkezoKor() {
       window.location.href = "ranglista.html";
     }, 2000);
   }
-  
-
-
-
-  
 }
 
 class Jatekos {
@@ -326,8 +320,6 @@ class Tabla {
   }
 }
 
-
-
 // jatekmodKapcsol.js-ből kapjuk meg, oldal betöltődése után indul is
 
 const jatekAdatok = JSON.parse(window.localStorage.getItem('jatekAdatok'));
@@ -342,4 +334,3 @@ const ujJatek = new Jatek(
 
 ujJatek.jatekIndit();
 console.log(ujJatek);
-
