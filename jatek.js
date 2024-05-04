@@ -189,10 +189,14 @@ kovetkezoKor() {
   
     gyoztes += " Nyert";
   
-    document.getElementById('aktualisJatekosNev').innerText = gyoztes;
+    // Display the winner on the page
+    const aktualisJatekosNevElem = document.getElementById('aktualisJatekosNev');
+    if (aktualisJatekosNevElem) {
+      aktualisJatekosNevElem.innerText = gyoztes;
+    }
 
+    // Retrieve and update top3 from local storage
     const top3 = JSON.parse(localStorage.getItem('top3')) || [];
-
     const aktualisGyoztesPontszam = this.jatekos1.pontok > this.jatekos2.pontok ? this.jatekos1.pontok : this.jatekos2.pontok;
     let top3baKerulhet = true;
 
@@ -216,10 +220,12 @@ kovetkezoKor() {
 
     localStorage.setItem('top3', JSON.stringify(korlatozottTop3));
   
+    // Redirect to ranglista.html after 5 seconds
     setTimeout(() => {
       window.location.href = "ranglista.html";
     }, 5000);
 }
+
 
 
   
