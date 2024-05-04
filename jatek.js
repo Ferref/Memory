@@ -122,18 +122,6 @@ kovetkezoKor() {
     // Váltogat a két játékosunk között
     // Szóló módban nem kell váltogatni
 
-    if (this.jatekMod != "szolo") {
-
-      // Ha nem talált az előző kártyakombináció akkor a másik játékos jön
-
-      if (!this.aktivJatekos.elozoTalalt) {
-        if (this.aktivJatekos === this.jatekos1) {
-          this.aktivJatekos = this.jatekos2;
-        } else if (this.aktivJatekos === this.jatekos2) {
-          this.aktivJatekos = this.jatekos1;
-        }
-      }
-    }
 
     if (this.aktivKartyakEgyeznek()) {
       console.log("Kártyák egyeznek!");
