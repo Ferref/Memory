@@ -287,14 +287,9 @@ img {
 }
 
 #top3-table {
-  width: max-content;
-  margin: 50px;
-  display: grid;
-  grid-template-columns: repeat(2, 100px); /* Két oszlop: Név és Pont */
-  gap: 20px;
-  border: 10px solid black;
-  padding: 25px;
-  margin-bottom: -10px;
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
 }
 
 #top3-table th,

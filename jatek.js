@@ -114,14 +114,17 @@ class Jatek {
 
 // Átkapcsol a következő körre
 kovetkezoKor() {
+  console.log("Aktiv: " + this.aktivJatekos.jatekosNev);
+  console.log("talalt: " + this.elozoTalalt);
   this.korSzamlalo++;
   console.log("\n\n\nK Ö R: " + this.korSzamlalo);
   console.log("#########" + this.aktivJatekos.jatekosNev + "#########");
 
   if (this.korSzamlalo > 1) {
     // Váltogat a két játékosunk között
-    // Szóló módban nem kell váltogatni
-
+    if (!this.elozoTalalt) {
+      this.aktivJatekos = this.aktivJatekos === this.jatekos1 ? this.jatekos2 : this.jatekos1;
+    }
 
     if (this.aktivKartyakEgyeznek()) {
       console.log("Kártyák egyeznek!");
@@ -137,7 +140,7 @@ kovetkezoKor() {
       let lastIndexOfMegtalalt = this.kartyak.indexOf(this.aktivLapok[1]);
 
       this.kartyak.splice(firstIndexOfMegtalalt, 1);
-      this.kartyak.splice(lastIndexOfMegtalalt, 1);
+      this.kartyak.splice(lastIndexOfMegtalalt - 1, 1);
 
       this.kartyaVanMeg -= 2;
     } else {
@@ -165,6 +168,7 @@ kovetkezoKor() {
   document.getElementById("aktualisJatekosNev").innerText = this.aktivJatekos.jatekosNev;
   this.kieertekelesTortenik = false;
 }
+
 
   // Befejezi a játékot
   jatekVege() {
