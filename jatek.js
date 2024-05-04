@@ -172,51 +172,47 @@ kovetkezoKor() {
 
   // Befejezi a játékot
   jatekVege() {
+    // Győztes kiválasztása
     let gyoztes = "";
     if (this.jatekos1.pontok === this.jatekos2.pontok) {
       gyoztes = "Döntetlen";
     } else {
       gyoztes = this.jatekos1.pontok > this.jatekos2.pontok ? this.jatekos1.jatekosNev : this.jatekos2.jatekosNev;
     }
-  
     gyoztes += " Nyert";
   
-    // Display the winner on the page
-    const aktualisJatekosNevElem = document.getElementById('aktualisJatekosNev');
-    if (aktualisJatekosNevElem) {
-      aktualisJatekosNevElem.innerText = gyoztes;
-    }
-
-    // Retrieve and update top3 from local storage
+    // Összes játékos neve és pontszáma
+    const jatekosok = [
+      { nev: this.jatekos1.jatekosNev, pontok: this.jatekos1.pontok },
+      { nev: this.jatekos2.jatekosNev, pontok: this.jatekos2.pontok }
+    ];
+  
+    // Ranglista frissítése
     const top3 = JSON.parse(localStorage.getItem('top3')) || [];
-    const aktualisGyoztesPontszam = this.jatekos1.pontok > this.jatekos2.pontok ? this.jatekos1.pontok : this.jatekos2.pontok;
-    let top3baKerulhet = true;
-
-    for (const jatekos of top3) {
-      if (jatekos.name === gyoztes) {
-        if (aktualisGyoztesPontszam <= jatekos.score) {
-          top3baKerulhet = false;
-        } else {
-          jatekos.score = aktualisGyoztesPontszam;
-        }
+  
+    jatekosok.forEach(jatekos => {
+      const { nev, pontok } = jatekos;
+      const jatekosTop3 = top3.find(elem => elem.name === nev);
+  
+      if (!jatekosTop3 && pontok > 0) {
+        top3.push({ name: nev, score: pontok });
+      } else if (jatekosTop3 && pontok > jatekosTop3.score) {
+        jatekosTop3.score = pontok;
       }
-    }
-
-    if (top3baKerulhet) {
-      top3.push({ name: gyoztes, score: aktualisGyoztesPontszam });
-    }
-
+    });
+  
     top3.sort((a, b) => b.score - a.score);
-
+  
     const korlatozottTop3 = top3.slice(0, 3);
-
+  
     localStorage.setItem('top3', JSON.stringify(korlatozottTop3));
   
-    // Redirect to ranglista.html after 5 seconds
+    // Várunk 2 másodpercet, majd átirányítjuk a felhasználót a ranglistára
     setTimeout(() => {
       window.location.href = "ranglista.html";
-    }, 5000);
-}
+    }, 2000);
+  }
+  
 
 
 
