@@ -137,7 +137,6 @@ class Jatek {
 
           this.kartyaVanMeg -= 2;
       } else {
-          console.log("Kártyák nem egyeznek");
           this.aktivJatekos.elozoTalalt = false;
           for (let i = 0; i < this.aktivLapok.length; i++) {
               this.aktivLapok[i].kartyaElrejt();
