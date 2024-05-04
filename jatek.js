@@ -8,7 +8,9 @@ class Jatek {
     avatar2Src
   ) {
     tablaMeret = Math.abs(Number(tablaMeret.split(" ")[0]));
-    this.idokorlatInSeconds = idokorlat ? Math.abs(Number(idokorlat.split(" ")[0])) * 60 : 0;
+    this.idokorlatInSeconds = Math.abs(Number(idokorlat.split(" ")[0])) * 60;
+
+
     this.jatekos1 = new Jatekos(jatekosNev1, document.getElementById("jatekos1Adatai"), avatar1Src);
     this.jatekos2 = new Jatekos(jatekosNev2, document.getElementById("jatekos2Adatai"), avatar2Src);
     this.tabla = new Tabla(tablaMeret);
@@ -100,7 +102,6 @@ class Jatek {
       this.tabla.tablaDiv.appendChild(this.kartyak[i].kartyaDiv);
     }
   }
-  
 
   // Megnézi hogy egyeznek-e a kártyák
   aktivKartyakEgyeznek() {
@@ -118,9 +119,13 @@ kovetkezoKor() {
   console.log("#########" + this.aktivJatekos.jatekosNev + "#########");
 
   if (this.korSzamlalo > 1) {
+    // Váltogat a két játékosunk között
     // Szóló módban nem kell váltogatni
-    if (this.jatekMod !== "szolo") {
+
+    if (this.jatekMod != "szolo") {
+
       // Ha nem talált az előző kártyakombináció akkor a másik játékos jön
+
       if (!this.aktivJatekos.elozoTalalt) {
         if (this.aktivJatekos === this.jatekos1) {
           this.aktivJatekos = this.jatekos2;
@@ -215,6 +220,9 @@ kovetkezoKor() {
       window.location.href = "ranglista.html";
     }, 5000);
 }
+
+
+  
 }
 
 class Jatekos {
@@ -226,11 +234,11 @@ class Jatekos {
     jatekosKep.style.backgroundImage = `url(${avatarSrc})`;
   }
 
+  // Hozzáadja a kártyákat a soron következő játékoshoz
   kartyaFelvesz() {
     this.pontok++;
   }
 }
-
 
 class Kartya {
   constructor(name) {
@@ -241,7 +249,7 @@ class Kartya {
 
     this.kartyaDiv.onclick = () => {
       if (this.kartyaStatus === 'mutat' || ujJatek.kieertekelesTortenik || this.kartyaStatus === 'kiment') {
-        return;
+        return; // Ha a státusz "kiment", ne csináljon semmit
       }
 
       if (this.kartyaStatus === 'rejtett') {
@@ -260,6 +268,7 @@ class Kartya {
       }
     }
 
+    // Ha vége az animációnak
     this.kartyaDiv.addEventListener('transitionend', () => {
       this.kartyaDiv.style.transition = '';
     });
@@ -320,6 +329,8 @@ class Tabla {
   }
 }
 
+
+
 // jatekmodKapcsol.js-ből kapjuk meg, oldal betöltődése után indul is
 
 const jatekAdatok = JSON.parse(window.localStorage.getItem('jatekAdatok'));
@@ -327,9 +338,10 @@ const ujJatek = new Jatek(
   jatekAdatok.tablaMeret,
   jatekAdatok.jatekosNev1,
   jatekAdatok.jatekosNev2,
-  jatekAdatok.idokorlat,
+  jatekAdatok.megadottIdozito,
   jatekAdatok.avatar1Src,
   jatekAdatok.avatar2Src
 );
 
 ujJatek.jatekIndit();
+console.log(ujJatek);

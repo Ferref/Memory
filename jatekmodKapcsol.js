@@ -1,8 +1,10 @@
 document.addEventListener('DOMContentLoaded', function() {
     let nev1Input = '';
     let nev2Input = '';
+    let jatekmod = '';
     let tablameret = '';
     let idozito = '';
+    let nehezseg = '';
 
     function gombokSotitese(gombok) {
         gombok.forEach(gomb => {
@@ -27,10 +29,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const tablameretGombok = document.querySelectorAll('#tablameret button');
     const idozitoGombok = document.querySelectorAll('#idozito button');
+    const nehezsegGombok = document.querySelectorAll('#nehezseg button');
     const jatekInditGomb = document.getElementById("jatek");
 
     gombokSotitese(tablameretGombok);
     gombokSotitese(idozitoGombok);
+    gombokSotitese(nehezsegGombok);
+
     document.getElementById("container").addEventListener('click', function(event) {
         const target = event.target;
         if (target.id === "nev1Input") {
@@ -52,16 +57,18 @@ document.addEventListener('DOMContentLoaded', function() {
     function kivalasztottEllenorzes() {
         let kivalasztottTablameret = document.querySelector('#tablameret button.kivalasztott');
         let kivalasztottIdozito = document.querySelector('#idozito button.kivalasztott');
+        let kivalasztottNehezseg = document.querySelector('#nehezseg button.kivalasztott');
 
         const missingDataAlert = "Hiányos adatok! Kérjük válasszon ki egy elemet minden kategóriából.";
 
-        if (!kivalasztottTablameret || !kivalasztottIdozito) {
+        if (!kivalasztottTablameret || !kivalasztottIdozito || (document.querySelector('#nehezseg') && !kivalasztottNehezseg)) {
             alert(missingDataAlert);
             return false;
         }
 
         tablameret = kivalasztottTablameret.textContent;
         idozito = kivalasztottIdozito.textContent;
+        nehezseg = kivalasztottNehezseg ? kivalasztottNehezseg.textContent : "Nincs";
 
         return true;
     }
@@ -84,8 +91,10 @@ document.addEventListener('DOMContentLoaded', function() {
             const jatekAdatok = {
                 jatekosNev1: nev1Input,
                 jatekosNev2: nev2Input,
+                jatekMod: jatekmod,
                 tablaMeret: tablameret,
                 megadottIdozito: idozito,
+                megadottNehezseg: nehezseg,
                 avatar1Src: avatar1Src,
                 avatar2Src: avatar2Src
             };
