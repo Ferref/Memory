@@ -59,7 +59,6 @@ class Jatek {
 
   // Elinditja a jatekot
   jatekIndit() {
-    console.log("Start...");
     this.kartyakGeneral();
     this.aktivJatekos = this.jatekos1;
 
@@ -251,7 +250,6 @@ class Kartya {
 
       if (ujJatek.aktivLapok.length === 2) {
         ujJatek.kieertekelesTortenik = true;
-        console.log("Megvan a két lap, ellenőrzés...");
 
         setTimeout(function () {
           ujJatek.kovetkezoKor();
@@ -268,11 +266,9 @@ class Kartya {
   kepBeallitKartyanak(kep) {
     var url = "url('" + ujJatek.jatekForrasok.kartyaKepek + kep + ".jpg')";
     this.kartyaDiv.style.backgroundImage = url;
-    console.log(url);
   }
 
   kartyaElrejt() {
-    console.log("Kártya elrejtve: " + this.kartyaDiv.getAttribute("name"));
     this.kartyaDiv.style.transform = "rotateY(0deg)"; // Visszafordítás 0 fokra
     this.kartyaDiv.style.transition = "transform 0.5s ease"; // CSS tranzíció beállítása
     this.kepBeallitKartyanak(ujJatek.jatekForrasok.kerdojelKartyaKep);
@@ -280,7 +276,6 @@ class Kartya {
   }
 
   kartyaMegjelenit() {
-    console.log("Kártya megjelenítve: " + this.kartyaDiv.getAttribute("name"));
 
     // Eltávolitjuk az atmeneti stilust
     this.kartyaDiv.style.transition = '';
@@ -303,7 +298,6 @@ class Kartya {
   }
 
   kartyaKiment() {
-    console.log("Kártya kimentve: " + this.kartyaDiv.getAttribute("name"));
     this.kepBeallitKartyanak(ujJatek.jatekForrasok.kimentKartyaKep);
     this.kartyaStatus = "kiment";
   }
@@ -333,4 +327,3 @@ const ujJatek = new Jatek(
 );
 
 ujJatek.jatekIndit();
-console.log(ujJatek);
