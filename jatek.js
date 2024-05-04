@@ -114,28 +114,16 @@ class Jatek {
 
 // Átkapcsol a következő körre
 kovetkezoKor() {
-  console.log("Aktiv: " + this.aktivJatekos.jatekosNev);
-  console.log("talalt: " + this.elozoTalalt);
-  this.korSzamlalo++;
-  console.log("\n\n\nK Ö R: " + this.korSzamlalo);
-  console.log("#########" + this.aktivJatekos.jatekosNev + "#########");
+    // Jatekosinfok Update
+    this.korSzamlalo++;
 
-  // Check if it's not the first turn
   if (this.korSzamlalo > 1) {
-      // Switch players if the previous cards didn't match
-      if (!this.elozoTalalt) {
-          this.aktivJatekos = this.aktivJatekos === this.jatekos1 ? this.jatekos2 : this.jatekos1;
-      }
 
-      // Check if the active cards match
       if (this.aktivKartyakEgyeznek()) {
-          console.log("Kártyák egyeznek!");
 
-          // Increment player's points and mark previous match as successful
           this.aktivJatekos.kartyaFelvesz();
           this.aktivJatekos.elozoTalalt = true;
 
-          // Remove matched cards from the game
           for (let i = 0; i < this.aktivLapok.length; i++) {
               this.aktivLapok[i].kartyaKiment();
           }
@@ -149,31 +137,38 @@ kovetkezoKor() {
           this.kartyaVanMeg -= 2;
       } else {
           console.log("Kártyák nem egyeznek");
-
-          // Hide cards if they don't match
+          this.aktivJatekos.elozoTalalt = false;
           for (let i = 0; i < this.aktivLapok.length; i++) {
               this.aktivLapok[i].kartyaElrejt();
           }
       }
 
-      // Check if all cards are matched
       if (this.kartyaVanMeg === 0) {
           this.jatekVege();
       }
 
-      // Reset active cards array
       this.aktivLapok = [];
-  }
 
-  // Update player information on the page
-  document.getElementById('jatekos1Adatai').querySelector('.jatekosNev').textContent = this.jatekos1.jatekosNev;
-  document.getElementById('jatekos1Adatai').querySelector('.jatekosPontok').textContent = 'Pontok: ' + this.jatekos1.pontok;
-  if (this.jatekos2) {
-      document.getElementById('jatekos2Adatai').querySelector('.jatekosNev').textContent = this.jatekos2.jatekosNev;
-      document.getElementById('jatekos2Adatai').querySelector('.jatekosPontok').textContent = 'Pontok: ' + this.jatekos2.pontok;
-  }
-  document.getElementById("aktualisJatekosNev").innerText = this.aktivJatekos.jatekosNev;
-  this.kieertekelesTortenik = false;
+    if (!this.aktivJatekos.elozoTalalt) {
+          if(this.aktivJatekos === this.jatekos1){
+            this.aktivJatekos = this.jatekos2;
+          }
+          else if(this.aktivJatekos === this.jatekos2){
+            this.aktivJatekos = this.jatekos1;
+          }
+      }
+    }
+
+    document.getElementById('jatekos1Adatai').querySelector('.jatekosNev').textContent = this.jatekos1.jatekosNev;
+    document.getElementById('jatekos1Adatai').querySelector('.jatekosPontok').textContent = 'Pontok: ' + this.jatekos1.pontok;
+
+    document.getElementById('jatekos2Adatai').querySelector('.jatekosNev').textContent = this.jatekos2.jatekosNev;
+    document.getElementById('jatekos2Adatai').querySelector('.jatekosPontok').textContent = 'Pontok: ' + this.jatekos2.pontok;
+
+    document.getElementById("aktualisJatekosNev").innerText = this.aktivJatekos.jatekosNev;
+
+
+      this.kieertekelesTortenik = false;
 }
 
 
