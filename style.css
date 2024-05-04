@@ -301,3 +301,11 @@ img {
 .jatekos{
   height: 750px;
 }
+
+.jatekosKep{
+  height: 300px;
+  width: 300px;
+  background-size: cover;
+  aspect-ratio: 1/1;
+  border: 3px solid black;
+}

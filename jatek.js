@@ -13,8 +13,8 @@ class Jatek {
     this.idokorlatInSeconds = Math.abs(Number(idokorlat.split(" ")[0])) * 60;
 
 
-    this.jatekos1 = new Jatekos(jatekosNev1, document.getElementById("jatekos1Adatai"), avatar1Src);
-    this.jatekos2 = new Jatekos(jatekosNev2, document.getElementById("jatekos2Adatai"), avatar2Src);
+    this.jatekos1 = new Jatekos(jatekosNev1, document.getElementById("jatekos1Kep"), avatar1Src);
+    this.jatekos2 = new Jatekos(jatekosNev2, document.getElementById("jatekos2Kep"), avatar2Src);
     this.tabla = new Tabla(tablaMeret);
     this.kartyak = [];
     this.kartyaVanMeg = tablaMeret * tablaMeret;
