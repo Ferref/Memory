@@ -5,29 +5,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Játékmód</title>
+    <title>Főmenü</title>
     <link rel="icon" type="image/x-icon" href="kepek/cat.png">
     <script src="jatekHangok.js" defer></script>
 </head>
 
 <body>
-    <h1>Memory</h1>
+    <h1>Memory Game</h1>
     <div id="container">
         <div class="jatekmod">
             <div id="emberEllen">
                 <img src="kepek/jatekmod/catcat.jpg" class="kepek" alt="">
-                <a href="jatekosellen.html"><button class="navGomb">Játék Indítása</button></a>
+                <a onclick="return makeSound('jatekosellen.html')" href="#"><button class="navGomb">Játék Indítása</button></a> <!-- -->
             </div>
             <div id="ranglista">
                 <img src="kepek/jatekmod/ranglista.jpg" class="kepek" alt="">
-                <a href="ranglista.html"><button class="navGomb">Ranglista</button></a>
+                <a onclick="return makeSound('ranglista.html')" href="#"><button class="navGomb">Ranglista</button></a> <!-- -->
             </div>
             <div id="keszitok">
                 <img src="kepek/jatekmod/keszitok.jpg" class="kepek" alt="">
-                <a href="keszitok.html"><button class="navGomb">Készítők</button></a>
+                <a onclick="return makeSound('keszitok.html')" href="#"><button class="navGomb">Készítők</button></a> <!-- -->
             </div>
         </div>
-        <div id="jatek"></div>
     </div>
 </body>
 

@@ -6,13 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/x-icon" href="kepek/cat.png">
-    <title>Játékos ellen</title>
+    <title>Új Játék</title>
     <script src="jatekmodKapcsol.js" defer></script>
     <script src="jatekHangok.js" defer></script>
 </head>
 
 <body>
-    <h1>Memory</h1>
+    <h1>Memory Game</h1>
     <div id="container">
         <h1>Játék ember ellen</h1><br>
         <div class="divek">
@@ -38,8 +38,8 @@
                         <img class="avatar" src="kepek/avatar/avatar5.jpg">
                     </div>
 
-                    <a class="prev" onclick="plusSlides(-1, 'avatar1')">&#10094;</a>
-                    <a class="next" onclick="plusSlides(1, 'avatar1')">&#10095;</a>
+                    <a class="prev" onclick="plusSlides(-1, 'avatar1'), buttonclick()">&#10094;</a>  <!-- -->
+                    <a class="next" onclick="plusSlides(1, 'avatar1'), buttonclick()">&#10095;</a> <!-- -->
                 </div>
                 <div>
                     <span class="dot" onclick="currentSlide(1, 'avatar1')"></span>
@@ -61,6 +61,7 @@
                         <label class="labelFix" for="nev2">Játékos2 név</label><br><br>
                         <input class="labelFix2" type="text" id="nev2Input" value="Játékos2">
                     </div>
+                    <br> <!-- -->
                     <p class="labelFix5">Táblaméret</p>
                 </div>
 
@@ -101,8 +102,8 @@
                         <img class="avatar" src="kepek/avatar/avatar5.jpg">
                     </div>
 
-                    <a class="prev" onclick="plusSlides(-1, 'avatar2')">&#10094;</a>
-                    <a class="next" onclick="plusSlides(1, 'avatar2')">&#10095;</a>
+                    <a class="prev" onclick="plusSlides(-1, 'avatar2'), buttonclick()">&#10094;</a> <!-- -->
+                    <a class="next" onclick="plusSlides(1, 'avatar2'), buttonclick()">&#10095;</a> <!-- -->
                 </div>
                 <div>
                     <span class="dot" onclick="currentSlide(1, 'avatar2')"></span>

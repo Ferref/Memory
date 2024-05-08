@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Memory</title>
+  <title>Memory Game</title>
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/x-icon" href="kepek/cat.png">
   <script src="ellenoriz.js" defer></script>
@@ -13,13 +13,20 @@
 </head>
 
 <body>
-  <h1 id="title">Memory</h1>
+  <h1 id="title">Memory Game</h1>
+
+  <div class="musicOn">
+    <audio id="audio" style="display:none;" src="hangok/zene.mp3" controls autoplay loop>
+  </div>
+  <div class="zenecontainer">
+    <button class="lejatszo"></button>
+  </div>
 
   <!-- Nem a játékhoz tartozó részek: Keret, Gombok, stb... -->
   <div id="container">
-    <a href="index.html"><button class="navGomb">Új játék</button></a>
-    <a href="ranglista.html"><button class="navGomb">Ranglista</button></a>
-    <a href="keszitok.html"><button class="navGomb">Készítők</button></a>
+    <a onclick="return makeSound('index.html')" href="#"><button class="navGomb">Új játék</button></a> <!-- -->
+    <a onclick="return makeSound('ranglista.html')" href="#"><button class="navGomb">Ranglista</button></a> <!-- -->
+    <a onclick="return makeSound('keszitok.html')" href="#"><button class="navGomb">Készítők</button></a> <!-- -->
 
     <div id="idozito"></div>
 

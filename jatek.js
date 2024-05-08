@@ -61,6 +61,7 @@ class Jatek {
   jatekIndit() {
     this.kartyakGeneral();
     this.aktivJatekos = this.jatekos1;
+    document.getElementById('jatekos1Kep').style.borderColor='green'; // <!-- -->
 
     this.kovetkezoKor();
     this.kartyakMegjelenitese();
@@ -98,6 +99,16 @@ class Jatek {
       // Beállítjuk a kártya elhelyezését a táblán
       this.kartyak[i].kartyaDiv.style.gridColumn = col + 1; // Oszlopszám kezdőértéke 1
       this.kartyak[i].kartyaDiv.style.gridRow = row + 1; // Sorszám kezdőértéke 1
+
+      
+    if ((this.tabla.tablaMeret*this.tabla.tablaMeret)==36) { // <!-- -->
+      this.kartyak[i].kartyaDiv.style.width='100px'; // <!-- -->
+      this.kartyak[i].kartyaDiv.style.height='100px'; // <!-- -->
+    }
+    else if ((this.tabla.tablaMeret*this.tabla.tablaMeret)==64) { // <!-- -->
+      this.kartyak[i].kartyaDiv.style.width='75px'; // <!-- -->
+      this.kartyak[i].kartyaDiv.style.height='75px'; // <!-- -->
+    }
   
       // Hozzáadjuk a kártyát a táblához
       this.tabla.tablaDiv.appendChild(this.kartyak[i].kartyaDiv);
@@ -136,7 +147,9 @@ class Jatek {
           this.kartyak.splice(lastIndexOfMegtalalt - 1, 1);
 
           this.kartyaVanMeg -= 2;
+          play3(); // <!-- -->
       } else {
+        play2(); // <!-- -->
           this.aktivJatekos.elozoTalalt = false;
           for (let i = 0; i < this.aktivLapok.length; i++) {
               this.aktivLapok[i].kartyaElrejt();
@@ -152,9 +165,13 @@ class Jatek {
       if (!this.aktivJatekos.elozoTalalt) {
           if(this.aktivJatekos === this.jatekos1){
             this.aktivJatekos = this.jatekos2;
+            document.getElementById('jatekos1Kep').style.borderColor='black'; // <!-- -->
+            document.getElementById('jatekos2Kep').style.borderColor='green'; // <!-- -->
           }
           else if(this.aktivJatekos === this.jatekos2){
             this.aktivJatekos = this.jatekos1;
+            document.getElementById('jatekos1Kep').style.borderColor='green'; // <!-- -->
+            document.getElementById('jatekos2Kep').style.borderColor='black'; // <!-- -->
           }
       }
     }
@@ -275,6 +292,7 @@ class Kartya {
   }
 
   kartyaMegjelenit() {
+    play(); // <!-- -->
 
     // Eltávolitjuk az atmeneti stilust
     this.kartyaDiv.style.transition = '';
@@ -308,8 +326,18 @@ class Tabla {
     this.tablaDiv = document.getElementById("tabla");
 
     // grid elosztás beállítása
-    this.tablaDiv.style.gridTemplateColumns = `repeat(${this.tablaMeret}, 125px)`;
-    this.tablaDiv.style.gridTemplateRows = `repeat(${this.tablaMeret}, 125px)`;
+    if((this.tablaMeret*this.tablaMeret)==16) {
+      this.tablaDiv.style.gridTemplateColumns = `repeat(${this.tablaMeret}, 125px)`; // <!-- -->
+      this.tablaDiv.style.gridTemplateRows = `repeat(${this.tablaMeret}, 125px)`; // <!-- -->
+    }
+    else if ((this.tablaMeret*this.tablaMeret)==36) {
+      this.tablaDiv.style.gridTemplateColumns = `repeat(${this.tablaMeret}, 100px)`; // <!-- -->
+      this.tablaDiv.style.gridTemplateRows = `repeat(${this.tablaMeret}, 100px)`; // <!-- -->
+    }
+    else if ((this.tablaMeret*this.tablaMeret)==64) {
+      this.tablaDiv.style.gridTemplateColumns = `repeat(${this.tablaMeret}, 75px)`; // <!-- -->
+      this.tablaDiv.style.gridTemplateRows = `repeat(${this.tablaMeret}, 75px)`; // <!-- -->
+    }
   }
 }
 

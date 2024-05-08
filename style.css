@@ -13,11 +13,11 @@ body {
   width: max-content;
   margin: 50px;
   display: grid;
-  grid-template-columns: repeat(8, 100px);
+  grid-template-columns: repeat(4, 100px);
   gap: 20px;
   border: 10px solid black;
   padding: 25px;
-  margin-bottom: -10px;
+  margin-bottom: 5px;
 }
 
 .kartya {
@@ -150,14 +150,15 @@ img {
 }
 
 /* Slideshow container */
-.slideshow-container,
-.slideshow-container2 {
+.slideshow-container {
   /*width: 25vw;*/
   position: relative;
   margin: auto;
   border: 10px solid black;
+}
+
+#avatar2 {
   position: relative;
-  right: 20px;
 }
 
 /* Next & previous buttons */
@@ -256,6 +257,7 @@ img {
 
 .musicOn {
   position: relative;
+  cursor: url('kepek/cursor.cur'), auto;
 }
 
 .lejatszo {
@@ -283,8 +285,9 @@ img {
 .jatekos img {
   max-width: 100px;
   max-height: 100px;
-  border: 5px olsid black;
+  border: 5px solid black;
 }
+
 
 #top3-table {
   display: flex;
@@ -308,4 +311,19 @@ img {
   background-size: cover;
   aspect-ratio: 1/1;
   border: 3px solid black;
+}
+
+#idozito{
+  margin-top: 20px;
+
+}
+
+.zenecontainer{
+  width:64px;
+  height: 64px;
+  cursor: url('kepek/cursor.cur'), auto;
+}
+
+.checked {
+  border-color: green;
 }

@@ -69,6 +69,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const jatekInditGomb = document.getElementById("jatek");
     jatekInditGomb.addEventListener('click', function (event) {
         event.preventDefault();
+        buttonclick();
         if (kivalasztottEllenorzes()) {
             nev1Input = document.getElementById("nev1Input").value.trim() || "Játékos1";
             nev2Input = document.getElementById("nev2Input")?.value.trim() || (document.querySelector('#nev2') ? "Játékos2" : "Nincs");
