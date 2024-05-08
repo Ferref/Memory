@@ -26,6 +26,7 @@ function play() {
     }, 100);
   }
   
+  /*
   function makeSoundCheck(url, event) {
     var buttonsound = new Audio('hangok/click.mp3');
     buttonsound.play(); 
@@ -36,6 +37,7 @@ function play() {
       }, 100);
     }
   }
+  */
 
 let on_off = document.querySelector('.zenecontainer .lejatszo');
 let audio = document.querySelector('.musicOn audio');

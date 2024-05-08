@@ -1,13 +1,16 @@
-function ellenoriz(event) {
-    var biztositas = confirm("Biztos vagy benne? Még nincs vége a játéknak.");
+var buttons = document.querySelectorAll('a[href^="#"] > button.navGomb');
 
-    if (!biztositas) {
+buttons.forEach(function(button) {
+    button.addEventListener('click', function(event) {
         event.preventDefault();
-    }
-}
+        
+        var href = button.parentElement.getAttribute('href');
+        
+        if(confirm("Biztos ki akarsz lépni? A játéknak még nincsen vége.")) {
+            // User confirmed, do not perform any redirection
 
-var linkek = document.querySelectorAll("a");
-
-for (var i = 0; i < linkek.length; i++) {
-    linkek[i].addEventListener("click", ellenoriz);
-}
+        } else {
+            return;
+        }
+    });
+});

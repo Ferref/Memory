@@ -7,14 +7,19 @@ class Jatek {
     jatekosNev2,
     idokorlat,
     avatar1Src,
-    avatar2Src
+    avatar2Src,
+    jatekMod
   ) {
     tablaMeret = Math.abs(Number(tablaMeret.split(" ")[0]));
     this.idokorlatInSeconds = Math.abs(Number(idokorlat.split(" ")[0])) * 60;
-
-
     this.jatekos1 = new Jatekos(jatekosNev1, document.getElementById("jatekos1Kep"), avatar1Src);
-    this.jatekos2 = new Jatekos(jatekosNev2, document.getElementById("jatekos2Kep"), avatar2Src);
+    
+    if(jatekMod === 'jatekosellen')
+    {
+      this.jatekos2 = new Jatekos(jatekosNev2, document.getElementById("jatekos2Kep"), avatar2Src);
+    }
+
+    this.jatekMod = jatekMod;
     this.tabla = new Tabla(tablaMeret);
     this.kartyak = [];
     this.kartyaVanMeg = tablaMeret * tablaMeret;
@@ -59,6 +64,11 @@ class Jatek {
 
   // Elinditja a jatekot
   jatekIndit() {
+    if(this.jatekMod == 'szolo')
+    {
+      document.getElementById('jatekos2Adatai').remove();
+    }
+
     this.kartyakGeneral();
     this.aktivJatekos = this.jatekos1;
     document.getElementById('jatekos1Kep').style.borderColor='green'; // <!-- -->
@@ -157,11 +167,14 @@ class Jatek {
       }
 
       if (this.kartyaVanMeg === 0) {
+        this.idokorlatInSeconds = 0;
           this.jatekVege();
       }
 
       this.aktivLapok = [];
 
+      if(this.jatekMod != 'szolo')
+      {
       if (!this.aktivJatekos.elozoTalalt) {
           if(this.aktivJatekos === this.jatekos1){
             this.aktivJatekos = this.jatekos2;
@@ -173,14 +186,17 @@ class Jatek {
             document.getElementById('jatekos1Kep').style.borderColor='green'; // <!-- -->
             document.getElementById('jatekos2Kep').style.borderColor='black'; // <!-- -->
           }
+        }
       }
     }
 
     document.getElementById('jatekos1Adatai').querySelector('.jatekosNev').textContent = this.jatekos1.jatekosNev;
     document.getElementById('jatekos1Adatai').querySelector('.jatekosPontok').textContent = 'Pontok: ' + this.jatekos1.pontok;
 
-    document.getElementById('jatekos2Adatai').querySelector('.jatekosNev').textContent = this.jatekos2.jatekosNev;
-    document.getElementById('jatekos2Adatai').querySelector('.jatekosPontok').textContent = 'Pontok: ' + this.jatekos2.pontok;
+    if(this.jatekMod != "szolo"){
+      document.getElementById('jatekos2Adatai').querySelector('.jatekosNev').textContent = this.jatekos2.jatekosNev;
+      document.getElementById('jatekos2Adatai').querySelector('.jatekosPontok').textContent = 'Pontok: ' + this.jatekos2.pontok;
+    }
 
     document.getElementById("aktualisJatekosNev").innerText = this.aktivJatekos.jatekosNev;
 
@@ -350,7 +366,8 @@ const ujJatek = new Jatek(
   jatekAdatok.jatekosNev2,
   jatekAdatok.megadottIdozito,
   jatekAdatok.avatar1Src,
-  jatekAdatok.avatar2Src
+  jatekAdatok.avatar2Src,
+  jatekAdatok.jatekMod
 );
 
 ujJatek.jatekIndit();

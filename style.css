@@ -289,14 +289,16 @@ img {
 }
 
 
-#top3-table {
+.top3-table {
   display: flex;
   flex-direction: column;
-  align-content: space-between;
+  align-content: space-around;
+  justify-content: center;
+  align-items: center;
 }
 
-#top3-table th,
-#top3-table td {
+.top3-table th,
+.top3-table td {
   padding: 10px;
 }
 

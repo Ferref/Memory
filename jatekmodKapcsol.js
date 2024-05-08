@@ -81,13 +81,20 @@ document.addEventListener('DOMContentLoaded', function() {
             const avatar1Src = avatar1ActiveSlide ? avatar1ActiveSlide.src : null;
             const avatar2Src = avatar2ActiveSlide ? avatar2ActiveSlide.src : null;
 
+            let position = window.location.href.split('/');
+            let currentPage = position[position.length - 1];
+            let currentPageParts = currentPage.split('.');
+
+            
             const jatekAdatok = {
                 jatekosNev1: nev1Input,
                 jatekosNev2: nev2Input,
                 tablaMeret: tablameret,
                 megadottIdozito: idozito,
                 avatar1Src: avatar1Src,
-                avatar2Src: avatar2Src
+                avatar2Src: avatar2Src,
+                jatekMod: currentPageParts[0]
+                
             };
 
             window.localStorage.setItem('jatekAdatok', JSON.stringify(jatekAdatok));
