@@ -1,17 +1,13 @@
-document.addEventListener('DOMContentLoaded', function() {
-    var buttons = document.querySelectorAll('.navGomb');
+function ellenoriz(event) {
+    var biztositas = confirm("Biztos vagy benne? Még nincs vége a játéknak.");
 
-    buttons.forEach(function(button) {
-        button.addEventListener('click', function(event) {
-            event.preventDefault(); // Az alapértelmezett esemény megakadályozása
-            
-            var href = button.parentElement.getAttribute('href');
-            
-            if (!confirm("Biztos ki akarsz lépni? A játéknak még nincsen vége.")) {
-                return; // Ha a felhasználó a "Mégsem" opciót választotta, egyszerűen térjünk vissza az eseménykezelőből
-            }
+    if (!biztositas) {
+        event.preventDefault();
+    }
+}
 
-            window.location.href = href; // Ha a felhasználó megerősítette a kilépést, akkor irányítson át az adott oldalra
-        });
-    });
-});
+var linkek = document.querySelectorAll("a");
+
+for (var i = 0; i < linkek.length; i++) {
+    linkek[i].addEventListener("click", ellenoriz);
+}
