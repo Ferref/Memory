@@ -13,6 +13,7 @@ class Jatek {
     tablaMeret = Math.abs(Number(tablaMeret.split(" ")[0]));
     this.idokorlatInSeconds = Math.abs(Number(idokorlat.split(" ")[0])) * 60;
     this.jatekos1 = new Jatekos(jatekosNev1, document.getElementById("jatekos1Kep"), avatar1Src);
+
     
     if(jatekMod === 'jatekosellen')
     {
@@ -76,39 +77,38 @@ class Jatek {
     this.kovetkezoKor();
     this.kartyakMegjelenitese();
 
-    // Időzítő kezelése
     const idozitoElem = document.getElementById('idozito');
 
     if (this.idokorlatInSeconds) {
-      // Van időkorlát, jelenítsük meg az időt
+
       const idozitoId = setInterval(() => {
         const minutes = Math.floor(this.idokorlatInSeconds / 60);
         const seconds = this.idokorlatInSeconds % 60;
         idozitoElem.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-        this.idokorlatInSeconds--; // Csökkentjük az időt minden másodpercben
+        this.idokorlatInSeconds--;
 
         if (this.idokorlatInSeconds < 0) {
-          clearInterval(idozitoId); // Időzítő leállítása, ha az idő lejárt
-          idozitoElem.textContent = "Vége"; // Jelzés, hogy vége az időnek
-          this.jatekVege(); // Hívjuk meg a játék vége metódust
+          clearInterval(idozitoId);
+          idozitoElem.textContent = "Vége";
+          this.jatekVege();
         }
       }, 1000);
     } else {
-      // Nincs időkorlát, csak jelenítsük meg a "Nincs" szöveget
+      
       idozitoElem.textContent = "Nincs";
     }
   }
 
-  // Megjeleníti a táblán a kártyákat
+  
   kartyakMegjelenitese() {
     for (let i = 0; i < this.kartyak.length; i++) {
-      // Kiszámoljuk az aktuális oszlop- és sorszámot az arányos elhelyezéshez
+      
       const row = Math.floor(i / this.tabla.tablaMeret);
       const col = i % this.tabla.tablaMeret;
   
-      // Beállítjuk a kártya elhelyezését a táblán
-      this.kartyak[i].kartyaDiv.style.gridColumn = col + 1; // Oszlopszám kezdőértéke 1
-      this.kartyak[i].kartyaDiv.style.gridRow = row + 1; // Sorszám kezdőértéke 1
+      
+      this.kartyak[i].kartyaDiv.style.gridColumn = col + 1;
+      this.kartyak[i].kartyaDiv.style.gridRow = row + 1;
 
       
     if ((this.tabla.tablaMeret*this.tabla.tablaMeret)==36) { // <!-- -->
@@ -207,44 +207,52 @@ class Jatek {
   jatekVege() {
     // Győztes kiválasztása
     let gyoztes = "";
-    if (this.jatekos1.pontok === this.jatekos2.pontok) {
-      gyoztes = "Döntetlen";
+    if (this.jatekMod !== 'szolo' && this.jatekos1.pontok === this.jatekos2.pontok) {
+        gyoztes = "Döntetlen";
+    } else if (this.jatekMod !== 'szolo') {
+        gyoztes = this.jatekos1.pontok > this.jatekos2.pontok ? this.jatekos1.jatekosNev : this.jatekos2.jatekosNev;
     } else {
-      gyoztes = this.jatekos1.pontok > this.jatekos2.pontok ? this.jatekos1.jatekosNev : this.jatekos2.jatekosNev;
+        gyoztes = this.jatekos1.jatekosNev + " Nyert"; // In solo mode, only player 1 can win
     }
-    gyoztes += " Nyert";
-  
+
     // Összes játékos neve és pontszáma
-    const jatekosok = [
-      { nev: this.jatekos1.jatekosNev, pontok: this.jatekos1.pontok },
-      { nev: this.jatekos2.jatekosNev, pontok: this.jatekos2.pontok }
-    ];
-  
+    let jatekosok = [];
+
+    // Add only player 1's data in solo mode
+    if (this.jatekMod !== 'szolo') {
+        jatekosok.push({ nev: this.jatekos1.jatekosNev, pontok: this.jatekos1.pontok, jatekMod: this.jatekMod });
+        jatekosok.push({ nev: this.jatekos2.jatekosNev, pontok: this.jatekos2.pontok, jatekMod: this.jatekMod });
+    } else {
+        jatekosok.push({ nev: this.jatekos1.jatekosNev, pontok: this.jatekos1.pontok, jatekMod: this.jatekMod });
+    }
+
     // Ranglista frissítése
-    const top3 = JSON.parse(localStorage.getItem('top3')) || [];
-  
+    let top3 = JSON.parse(localStorage.getItem('top3')) || [];
+
     jatekosok.forEach(jatekos => {
-      const { nev, pontok } = jatekos;
-      const jatekosTop3 = top3.find(elem => elem.name === nev);
-  
-      if (!jatekosTop3 && pontok > 0) {
-        top3.push({ name: nev, score: pontok });
-      } else if (jatekosTop3 && pontok > jatekosTop3.score) {
-        jatekosTop3.score = pontok;
-      }
+        const { nev, pontok, jatekMod } = jatekos;
+        const jatekosTop3 = top3.find(elem => elem.name === nev);
+
+        if (!jatekosTop3 && pontok > 0) {
+            top3.push({ name: nev, score: pontok, jatekMod: jatekMod });
+        } else if (jatekosTop3 && pontok > jatekosTop3.score) {
+            jatekosTop3.score = pontok;
+        }
     });
-  
+
     top3.sort((a, b) => b.score - a.score);
-  
+
     const korlatozottTop3 = top3.slice(0, 3);
-  
+
     localStorage.setItem('top3', JSON.stringify(korlatozottTop3));
-  
+
     // Várunk 2 másodpercet, majd átirányítjuk a felhasználót a ranglistára
     setTimeout(() => {
-      window.location.href = "ranglista.html";
+        window.location.href = "ranglista.html";
     }, 2000);
-  }
+}
+
+
 }
 
 class Jatekos {

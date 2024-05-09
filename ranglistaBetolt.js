@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (i < 3) {
                 table.rows[i + 1].cells[0].textContent = data[i].name;
                 table.rows[i + 1].cells[1].textContent = data[i].score;
+                table.rows[i + 1].cells[2].textContent = data[i].jatekMod;
             }
         }
     }
