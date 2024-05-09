@@ -6,8 +6,10 @@ function ellenoriz(event) {
     }
 }
 
-var linkek = document.querySelectorAll("a");
+document.addEventListener('DOMContentLoaded', function() {
+    var linkek = document.querySelectorAll("a");
 
-for (var i = 0; i < linkek.length; i++) {
-    linkek[i].addEventListener("click", ellenoriz);
-}
+    for (var i = 0; i < linkek.length; i++) {
+        linkek[i].addEventListener("click", ellenoriz);
+    }
+});
